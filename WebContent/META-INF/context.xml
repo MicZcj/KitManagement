@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context reloadable = "true">
+<Resource
+      name="jdbc/kit"
+      type="javax.sql.DataSource"
+      maxActive="4"
+      maxIdle="2"
+      username="root"
+      maxWait="5000"
+      driverClassName="com.mysql.jdbc.Driver"
+      password="zcj652584"
+      url="jdbc:mysql://localhost:3306/volunteer?characterEncoding=utf-8"/>
+</Context>
