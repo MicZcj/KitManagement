@@ -30,31 +30,14 @@
 </head>
 
 <body>
-	<!-- Section Background -->
-	<section class="section-background">
-	<div class="sight">
-		<h1 class="title">工具管理系统 | 后台管理</h1>
-		<p class="subtitle">欢迎你，管理员！</p>
-	</div>
-
-	<div class="container">
-		<ol class="breadcrumb">
-			<li><a href="admin_index.jsp">后台主页</a></li>
-			<li class="active"><a href="admin_user.jsp">管理员设置</a></li>
-			<li><a href="admin_type.jsp">工具类别设置</a></li>
-		</ol>
-	</div>
-	<!-- /.container --> </section>
-	<!-- /.section-background -->
-
-
+	<%@ include file="admin_header.jsp"%>
 
 	<section class="main">
 	<div class="container">
 		<div class="row">
-			<h1>管理员列表</h1>
-			<br>
-			<button type="button" class="btn btn-info">&nbsp;新&nbsp;增&nbsp;管&nbsp;理&nbsp;员</button>
+			<h1>管理员设置</h1>
+			<br> <a href="admin_usernew.jsp"><button type="button"
+					class="btn btn-info">&nbsp;新&nbsp;增&nbsp;管&nbsp;理&nbsp;员</button></a>
 			&nbsp;<br>&nbsp;
 			<table class="table table-striped">
 				<tr>
@@ -69,26 +52,35 @@
 					<td>haha</td>
 					<td>姓名111</td>
 					<td>图像处理</td>
-					<td><button type="button" class="btn btn-warning">修改</button>&nbsp;<button type="button" class="btn btn-danger">删除</button></td>
-					
+					<td><a href="admin_userchange.jsp"><button type="button"
+								class="btn btn-warning">修改</button></a>&nbsp;
+						<button type="button" class="btn btn-info">重置密码</button>&nbsp;
+						<button type="button" class="btn btn-danger">删除</button></td>
+
 				</tr>
-								<tr>
+				<tr>
 					<td>2</td>
 					<td>hahahaha</td>
 					<td>姓名222</td>
 					<td>图像处理</td>
-					<td><button type="button" class="btn btn-warning">修改</button>&nbsp;<button type="button" class="btn btn-danger">删除</button></td>
-					
+					<td><a href="admin_userchange.jsp"><button type="button"
+								class="btn btn-warning">修改</button></a>&nbsp;
+						<button type="button" class="btn btn-info">重置密码</button>&nbsp;
+						<button type="button" class="btn btn-danger">删除</button></td>
+
 				</tr>
-								<tr>
+				<tr>
 					<td>3</td>
 					<td>hahahahahaha</td>
 					<td>姓名333</td>
 					<td>编译器</td>
-					<td><button type="button" class="btn btn-warning">修改</button>&nbsp;<button type="button" class="btn btn-danger">删除</button></td>
-					
+					<td><a href="admin_userchange.jsp"><button type="button"
+								class="btn btn-warning">修改</button></a>&nbsp;
+						<button type="button" class="btn btn-info">重置密码</button>&nbsp;
+						<button type="button" class="btn btn-danger">删除</button></td>
+
 				</tr>
-				
+
 			</table>
 
 
@@ -98,7 +90,7 @@
 	<!-- /.container --> </section>
 	<!-- /.main -->
 
-	<%@ include file="footer.jsp"%>
+	<%@ include file="admin_footer.jsp"%>
 
 
 	<script src="assets/js/jquery-1.11.2.min.js"></script>

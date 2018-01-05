@@ -31,58 +31,33 @@
 
 <body>
 	<%@ include file="admin_header.jsp"%>
-
-
-
 	<section class="main">
 	<div class="container">
 		<div class="row">
-			<h1>工具类别设置</h1>
-			<br>
-			<table border="0">
-				<tr>
-					<td>新增工具类别&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td width="200px"><input name="" class="form-control"
-						type="text" placeholder="请输入类别名称"></td>
-					<td>&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="submit" class="btn btn-primary">&nbsp;&nbsp;新&nbsp;&nbsp;增&nbsp;&nbsp;</button>
-					</td>
-				</tr>
-			</table>
-			&nbsp;<br>&nbsp;
-			<table class="table table-striped">
-				<tr>
-					<th>ID</th>
-					<th>类别名称</th>
-					<th>操作</th>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>图像处理</td>
-					<td><a href="admin_typechange.jsp"><button type="button"
-								class="btn btn-warning">修改</button></a>&nbsp;
-						<button type="button" class="btn btn-danger">删除</button></td>
+			<div align="center">
+				<h1>修改工具类别</h1>
+				<br>
+				<table border="0" height="200px">
+					<tr>
+						<td>工具类别id</td>
+						<td>123456</td>
+					</tr>
+					<tr>
+						<td>类别名称</td>
+						<td><input name="" class="form-control" type="text"
+							placeholder="请输入旧密码"></td>
+					</tr>
 
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>编译器</td>
-					<td><a href="admin_typechange.jsp"><button type="button"
-								class="btn btn-warning">修改</button></a>&nbsp;
-						<button type="button" class="btn btn-danger">删除</button></td>
+				</table>
+				<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" class="btn btn-primary">&nbsp;&nbsp;修&nbsp;&nbsp;改&nbsp;改&nbsp;</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="admin_type.jsp"><button
+						type="button" class="btn btn-primary">&nbsp;&nbsp;返&nbsp;&nbsp;回&nbsp;&nbsp;</button></a>
+				<br>
+				<br>
+				<br>
 
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>版本控制</td>
-					<td><a href="admin_typechange.jsp"><button type="button"
-								class="btn btn-warning">修改</button></a>&nbsp;
-						<button type="button" class="btn btn-danger">删除</button></td>
-
-				</tr>
-
-			</table>
-
+			</div>
 
 		</div>
 		<!-- /.row -->

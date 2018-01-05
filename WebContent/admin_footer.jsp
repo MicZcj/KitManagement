@@ -27,9 +27,7 @@
 			</div>
 		</div>
 		<div class="col-sm-4 text-right">
-			<div class="copy">
-				吕凯涛 张昌健 张忆霄 张哲铖 陈峥 詹江鑫 <a href="admin_login.jsp">后台管理</a>
-			</div>
+			<div class="copy">吕凯涛 张昌健 张忆霄 张哲铖 陈峥 詹江鑫</div>
 		</div>
 	</div>
 	<!-- /.row -->

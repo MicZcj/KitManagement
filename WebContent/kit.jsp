@@ -36,32 +36,9 @@
 
 <body>
 
-	<!-- Home -->
-	<section class="portfolio-header" id="header"> <nav
-		class="navbar navbar-default">
-	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-
-			<a class="navbar-brand" href="index.jsp">工具管理系统</a>
-		</div>
-		<!-- /.navbar-header -->
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="index.jsp">主页</a></li>
-				<li class="active"><a href="allKit.jsp">全部工具</a></li>
-				<li><a href="upload.jsp">工具上传</a></li>
-				<li><a href="center.jsp">个人中心</a></li>
-			</ul>
-			<!-- /.nav -->
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container --> </nav> </section>
-	<!-- /#header -->
+	<jsp:include page="header.jsp">
+		<jsp:param name="type4" value="class=\"active\"" />
+	</jsp:include>
 
 
 	<!-- Section Background -->
@@ -69,7 +46,7 @@
 	<div class="container">
 		<ol class="breadcrumb">
 			<li><a href="index.jsp">主页</a></li>
-			<li><a href="allKit.jsp">主页</a></li>
+			<li><a href="allKit.jsp">全部工具</a></li>
 			<li class="active">&nbsp;PhotoShop CC 2015</li>
 		</ol>
 	</div>
@@ -136,29 +113,39 @@
 			<h3>1#&nbsp;&nbsp;&nbsp;用户A</h3>
 			<div class="row">
 				<div class="col-md-12 col-xs-12 form-group">
-					&nbsp;&nbsp;53534354453
-					<br><div align="right"><button type="button" class="btn btn-primary">&nbsp;回&nbsp;复&nbsp;</button>&nbsp;&nbsp;&nbsp;</div>
+					&nbsp;&nbsp;53534354453 <br>
+					<div align="right">
+						<button type="button" class="btn btn-primary">&nbsp;回&nbsp;复&nbsp;</button>
+						&nbsp;&nbsp;&nbsp;
 					</div>
+				</div>
 			</div>
 		</form>
-			<form class="row form">
+		<form class="row form">
 			<h3>2#&nbsp;&nbsp;&nbsp;用户B</h3>
 			<div class="row">
 				<div class="col-md-12 col-xs-12 form-group">
-				<blockquote>
-  <p>回复1#：............</p>
-</blockquote>
-					&nbsp;&nbsp;53534354453
-					<br><div align="right"><button type="button" class="btn btn-primary">&nbsp;回&nbsp;复&nbsp;</button>&nbsp;&nbsp;&nbsp;</div>
+					<blockquote>
+						<p>回复1#：............</p>
+					</blockquote>
+					&nbsp;&nbsp;53534354453 <br>
+					<div align="right">
+						<button type="button" class="btn btn-primary">&nbsp;回&nbsp;复&nbsp;</button>
+						&nbsp;&nbsp;&nbsp;
 					</div>
+				</div>
 			</div>
-		</form>	<form class="row form">
+		</form>
+		<form class="row form">
 			<h3>3#&nbsp;&nbsp;&nbsp;用户C</h3>
 			<div class="row">
 				<div class="col-md-12 col-xs-12 form-group">
-					&nbsp;&nbsp;53534354453
-					<br><div align="right"><button type="button" class="btn btn-primary">&nbsp;回&nbsp;复&nbsp;</button>&nbsp;&nbsp;&nbsp;</div>
+					&nbsp;&nbsp;53534354453 <br>
+					<div align="right">
+						<button type="button" class="btn btn-primary">&nbsp;回&nbsp;复&nbsp;</button>
+						&nbsp;&nbsp;&nbsp;
 					</div>
+				</div>
 			</div>
 		</form>
 

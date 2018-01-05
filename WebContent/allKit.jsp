@@ -35,32 +35,9 @@
 
 <body>
 
-	<!-- Home -->
-	<section class="portfolio-header" id="header"> <nav
-		class="navbar navbar-default">
-	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-
-			<a class="navbar-brand" href="index.jsp">工具管理系统</a>
-		</div>
-		<!-- /.navbar-header -->
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="index.jsp">主页</a></li>
-				<li class="active"><a href="allKit.jsp">全部工具</a></li>
-				<li><a href="upload.jsp">工具上传</a></li>
-				<li><a href="center.jsp">个人中心</a></li>
-			</ul>
-			<!-- /.nav -->
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container --> </nav> </section>
-	<!-- /#header -->
+	<jsp:include page="header.jsp">
+		<jsp:param name="type2" value="class=\"active\"" />
+	</jsp:include>
 
 
 	<!-- Section Background -->
@@ -97,17 +74,97 @@
 		<h1>工具列表</h1>
 		<br>
 		<table class="table table-striped">
-<tr><th>序号</th><th>名称</th><th>版本号</th><th>类别</th><th>上传时间</th><th>下载量<a href="">↓</a></th><th>点赞数<a href="">↑</a></th></tr>
-<tr><td>1</td><td><a href="kit.jsp">photoshop</a></td><td>V12.51.1135</td><td>图像处理</td><td>2017.11.30</td><td>235</td><td>144</td></tr>
-<tr><td>2</td><td><a href="kit.jsp">eclipse</a></td><td>201710</td><td>编译器</td><td>2018.1.5</td><td>713</td><td>200</td></tr>
-<tr><td>3</td><td><a href="kit.jsp">git</a></td><td>v6</td><td>项目管理</td><td>2017.1.3</td><td>60</td><td>13</td></tr>
-<tr><td>4</td><td><a href="kit.jsp">photoshop</a></td><td>V12.51.1135</td><td>图像处理</td><td>2017.11.30</td><td>235</td><td>144</td></tr>
-<tr><td>5</td><td><a href="kit.jsp">eclipse</a></td><td>201710</td><td>编译器</td><td>2018.1.5</td><td>713</td><td>200</td></tr>
-<tr><td>6</td><td><a href="kit.jsp">git</a></td><td>v6</td><td>项目管理</td><td>2017.1.3</td><td>60</td><td>13</td></tr>
-<tr><td>7</td><td><a href="kit.jsp">photoshop</a></td><td>V12.51.1135</td><td>图像处理</td><td>2017.11.30</td><td>235</td><td>144</td></tr>
-<tr><td>8</td><td><a href="kit.jsp">eclipse</a></td><td>201710</td><td>编译器</td><td>2018.1.5</td><td>713</td><td>200</td></tr>
-<tr><td>9</td><td><a href="kit.jsp">git</a></td><td>v6</td><td>项目管理</td><td>2017.1.3</td><td>60</td><td>13</td></tr>
-</table>
+			<tr>
+				<th>序号</th>
+				<th>名称</th>
+				<th>版本号</th>
+				<th>类别</th>
+				<th>上传时间</th>
+				<th>下载量<a href="">↓</a></th>
+				<th>点赞数<a href="">↑</a></th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td><a href="kit.jsp">photoshop</a></td>
+				<td>V12.51.1135</td>
+				<td>图像处理</td>
+				<td>2017.11.30</td>
+				<td>235</td>
+				<td>144</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td><a href="kit.jsp">eclipse</a></td>
+				<td>201710</td>
+				<td>编译器</td>
+				<td>2018.1.5</td>
+				<td>713</td>
+				<td>200</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td><a href="kit.jsp">git</a></td>
+				<td>v6</td>
+				<td>项目管理</td>
+				<td>2017.1.3</td>
+				<td>60</td>
+				<td>13</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td><a href="kit.jsp">photoshop</a></td>
+				<td>V12.51.1135</td>
+				<td>图像处理</td>
+				<td>2017.11.30</td>
+				<td>235</td>
+				<td>144</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td><a href="kit.jsp">eclipse</a></td>
+				<td>201710</td>
+				<td>编译器</td>
+				<td>2018.1.5</td>
+				<td>713</td>
+				<td>200</td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td><a href="kit.jsp">git</a></td>
+				<td>v6</td>
+				<td>项目管理</td>
+				<td>2017.1.3</td>
+				<td>60</td>
+				<td>13</td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td><a href="kit.jsp">photoshop</a></td>
+				<td>V12.51.1135</td>
+				<td>图像处理</td>
+				<td>2017.11.30</td>
+				<td>235</td>
+				<td>144</td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td><a href="kit.jsp">eclipse</a></td>
+				<td>201710</td>
+				<td>编译器</td>
+				<td>2018.1.5</td>
+				<td>713</td>
+				<td>200</td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td><a href="kit.jsp">git</a></td>
+				<td>v6</td>
+				<td>项目管理</td>
+				<td>2017.1.3</td>
+				<td>60</td>
+				<td>13</td>
+			</tr>
+		</table>
 
 	</div>
 	</section>

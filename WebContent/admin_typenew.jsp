@@ -33,57 +33,45 @@
 	<%@ include file="admin_header.jsp"%>
 
 
-
 	<section class="main">
 	<div class="container">
 		<div class="row">
-			<h1>工具类别设置</h1>
-			<br>
-			<table border="0">
-				<tr>
-					<td>新增工具类别&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td width="200px"><input name="" class="form-control"
-						type="text" placeholder="请输入类别名称"></td>
-					<td>&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="submit" class="btn btn-primary">&nbsp;&nbsp;新&nbsp;&nbsp;增&nbsp;&nbsp;</button>
-					</td>
-				</tr>
-			</table>
-			&nbsp;<br>&nbsp;
-			<table class="table table-striped">
-				<tr>
-					<th>ID</th>
-					<th>类别名称</th>
-					<th>操作</th>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>图像处理</td>
-					<td><a href="admin_typechange.jsp"><button type="button"
-								class="btn btn-warning">修改</button></a>&nbsp;
-						<button type="button" class="btn btn-danger">删除</button></td>
+			<div align="center">
+				<h1>新增管理员</h1>
+				<br>
+				<table border="0" height="200px">
 
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>编译器</td>
-					<td><a href="admin_typechange.jsp"><button type="button"
-								class="btn btn-warning">修改</button></a>&nbsp;
-						<button type="button" class="btn btn-danger">删除</button></td>
-
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>版本控制</td>
-					<td><a href="admin_typechange.jsp"><button type="button"
-								class="btn btn-warning">修改</button></a>&nbsp;
-						<button type="button" class="btn btn-danger">删除</button></td>
-
-				</tr>
-
-			</table>
+					<tr>
+						<td>用户名</td>
+						<td><input name="" class="form-control" type="text"
+							placeholder="请输入旧密码"></td>
+					</tr>
+					<tr>
+						<td>姓名</td>
+						<td><input name="" class="form-control" type="text"
+							placeholder="请输入旧密码"></td>
+					</tr>
+					<tr>
+						<td>权限类别&nbsp;&nbsp;&nbsp;</td>
+						<td><select class="form-control">
+								<option>请选择</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+						</select></td>
+					</tr>
+				</table>
+				<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" class="btn btn-primary">&nbsp;提&nbsp;交&nbsp;修&nbsp;改&nbsp;</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="admin_user.jsp"><button
+						type="button" class="btn btn-primary">&nbsp;&nbsp;返&nbsp;&nbsp;回&nbsp;&nbsp;</button></a>
+				<br>
+				<br>
+				<br>
 
 
+			</div>
 		</div>
 		<!-- /.row -->
 	</div>
