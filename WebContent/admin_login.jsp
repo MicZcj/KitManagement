@@ -55,7 +55,7 @@
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3>登陆</h3>
+                        			<h3>后台管理</h3>               
                         		</div>
                         		<div class="form-top-right">
                         			
@@ -71,8 +71,7 @@
 			                        	<label class="sr-only" for="form-password">密码</label>
 			                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
 			                        </div>
-			                                    若你还没有账户，请<a href="register.jsp">点击此处注册</a>！<br>   &nbsp;
-			                        <a href="index.jsp"><button type="button" class="btn">登陆</button></a>
+			                        <a href="admin_index.jsp"><button type="button" class="btn">登陆</button></a>
 			                    </form>
 		                    </div>
                         </div>

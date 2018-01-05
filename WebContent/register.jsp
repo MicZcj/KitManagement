@@ -55,7 +55,7 @@
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3>登陆</h3>
+                        			<h3>登陆</h3>               
                         		</div>
                         		<div class="form-top-right">
                         			
@@ -65,14 +65,38 @@
 			                    <form role="form" action="" method="post" class="login-form">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">用户名</label>
-			                        	<input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
+			                        	<input type="text" name="form-username" placeholder="用户名" class="form-username form-control" id="form-username">
 			                        </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="form-password">密码</label>
-			                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+			                        	<input type="password" name="form-password" placeholder="密码" class="form-password form-control" id="form-password">
 			                        </div>
-			                                    若你还没有账户，请<a href="register.jsp">点击此处注册</a>！<br>   &nbsp;
-			                        <a href="index.jsp"><button type="button" class="btn">登陆</button></a>
+			                        <div class="form-group">
+			                        	<label class="sr-only" for="form-password">重复输入</label>
+			                        	<input type="password" name="form-password" placeholder="重复输入" class="form-password form-control" id="form-password">
+			                        </div>
+			                        <div class="form-group">
+			                    		<label class="sr-only" for="form-username">姓名</label>
+			                        	<input type="text" name="form-username" placeholder="姓名" class="form-username form-control" id="form-username">
+			                        </div>
+			                        <div class="form-group">
+			                    		<label class="sr-only" for="form-username">出生日期</label>
+			                        	<input type="text" name="form-username" placeholder="出生日期" class="form-username form-control" id="form-username">
+			                        </div>
+			                        <div class="form-group">
+			                    		<label class="sr-only" for="form-username">电子邮箱</label>
+			                        	<input type="text" name="form-username" placeholder="电子邮箱" class="form-username form-control" id="form-username">
+			                        </div>
+			                        <div class="form-group">
+			                    		<label class="sr-only" for="form-username">联系电话</label>
+			                        	<input type="text" name="form-username" placeholder="联系电话" class="form-username form-control" id="form-username">
+			                        </div>
+			                        <div class="form-group">
+			                    		<label class="sr-only" for="form-username">所在部门</label>
+			                        	<input type="text" name="form-username" placeholder="所在部门" class="form-username form-control" id="form-username">
+			                        </div>
+		
+			                        <a href="login.jsp"><button type="button" class="btn">注册</button></a>
 			                    </form>
 		                    </div>
                         </div>
