@@ -8,8 +8,16 @@ public class Tool {
 	String ToolEdition; //工具版本号
 	String ToolTypeID; //工具类别ID
 	String ToolTag; //工具标签
+	String ToolPath; //工具存储路径
 	int LikeNum; //点赞数
 	int DownloadNum; //下载数
+	
+	public String getToolPath() {
+		return ToolPath;
+	}
+	public void setToolPath(String toolPath) {
+		ToolPath = toolPath;
+	}
 	public String getToolID() {
 		return ToolID;
 	}
