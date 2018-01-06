@@ -5,7 +5,6 @@ public class User {
 	String UserNickname; //用户名
 	String UserPassword; //密码
 	String UserName; //姓名
-	String Birthday; //出生日期
 	String Email; //邮件
 	String Phone; //电话
 	String Department; //部门名称
@@ -32,12 +31,6 @@ public class User {
 	}
 	public void setUserName(String userName) {
 		UserName = userName;
-	}
-	public String getBirthday() {
-		return Birthday;
-	}
-	public void setBirthday(String birthday) {
-		Birthday = birthday;
 	}
 	public String getEmail() {
 		return Email;

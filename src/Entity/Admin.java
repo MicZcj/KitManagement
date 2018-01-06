@@ -5,7 +5,7 @@ public class Admin {
 	String AdminNickname; //管理员名
 	String AdminName; //管理员姓名
 	String AdminPassword; //管理员密码
-	String TypeID; //管理的工具类别ID
+	String ToolTypeID; //管理的工具类别ID
 	public String getAdminID() {
 		return AdminID;
 	}
@@ -30,11 +30,11 @@ public class Admin {
 	public void setAdminPassword(String adminPassword) {
 		AdminPassword = adminPassword;
 	}
-	public String getTypeID() {
-		return TypeID;
+	public String getToolTypeID() {
+		return ToolTypeID;
 	}
-	public void setTypeID(String typeID) {
-		TypeID = typeID;
+	public void setToolTypeID(String toolTypeID) {
+		ToolTypeID = toolTypeID;
 	}
 
 }
