@@ -1,33 +1,26 @@
 package Entity;
 
 public class Tool {
-	String ToolID; //工具ID
-	String UserID; //上传的用户ID
-	String ToolName; //工具名称
-	String ToolDescription; //工具描述
-	String ToolEdition; //工具版本号
-	String ToolTypeID; //工具类别ID
-	String ToolTag; //工具标签
-	String ToolPath; //工具存储路径
-	int LikeNum; //点赞数
-	int DownloadNum; //下载数
-	
-	public String getToolPath() {
-		return ToolPath;
-	}
-	public void setToolPath(String toolPath) {
-		ToolPath = toolPath;
-	}
-	public String getToolID() {
+	private int ToolID; //工具ID,（数据库自增的，这个属性不要自己插入）
+	private int UserID; //上传的用户ID
+	private String ToolName; //工具名称
+	private String ToolDescription; //工具描述
+	private String ToolEdition; //工具版本号
+	private int ToolTypeID; //工具类别ID
+	private String ToolTag; //工具标签
+	private String ToolPath; //工具存储路径
+	private int LikeNum; //点赞数
+	private int DownloadNum; //下载数
+	public int getToolID() {
 		return ToolID;
 	}
-	public void setToolID(String toolID) {
+	public void setToolID(int toolID) {
 		ToolID = toolID;
 	}
-	public String getUserID() {
+	public int getUserID() {
 		return UserID;
 	}
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		UserID = userID;
 	}
 	public String getToolName() {
@@ -48,10 +41,10 @@ public class Tool {
 	public void setToolEdition(String toolEdition) {
 		ToolEdition = toolEdition;
 	}
-	public String getToolTypeID() {
+	public int getToolTypeID() {
 		return ToolTypeID;
 	}
-	public void setToolTypeID(String toolTypeID) {
+	public void setToolTypeID(int toolTypeID) {
 		ToolTypeID = toolTypeID;
 	}
 	public String getToolTag() {
@@ -59,6 +52,12 @@ public class Tool {
 	}
 	public void setToolTag(String toolTag) {
 		ToolTag = toolTag;
+	}
+	public String getToolPath() {
+		return ToolPath;
+	}
+	public void setToolPath(String toolPath) {
+		ToolPath = toolPath;
 	}
 	public int getLikeNum() {
 		return LikeNum;
@@ -72,5 +71,6 @@ public class Tool {
 	public void setDownloadNum(int downloadNum) {
 		DownloadNum = downloadNum;
 	}
+	
 
 }

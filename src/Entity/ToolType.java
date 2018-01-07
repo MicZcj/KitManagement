@@ -1,12 +1,12 @@
 package Entity;
 
 public class ToolType {
-	String ToolTypeID; //工具类别ID
-	String ToolTypeName; //工具类别名称
-	public String getToolTypeID() {
+	private int ToolTypeID; //工具类别ID,（数据库自增的，这个属性不要自己插入）
+	private String ToolTypeName; //工具类别名称
+	public int getToolTypeID() {
 		return ToolTypeID;
 	}
-	public void setToolTypeID(String toolTypeID) {
+	public void setToolTypeID(int toolTypeID) {
 		ToolTypeID = toolTypeID;
 	}
 	public String getToolTypeName() {

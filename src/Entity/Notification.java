@@ -3,27 +3,27 @@ package Entity;
 import java.util.Date;
 
 public class Notification {
-	String NotificationID; //通知ID
-	String UserID; //用户ID
-	String ToolID; //工具ID
-	Date NotificationTime; //通知时间，格式为“yyyy-MM-dd hh:mm:ss”
-	int ReadFlag; //已读或未读 （0为未读，1为已读）
-	public String getNotificationID() {
+	private int NotificationID; //通知ID,（数据库自增的，这个属性不要自己插入）
+	private int UserID; //用户ID
+	private int ToolID; //工具ID
+	private Date NotificationTime; //通知时间，格式为“yyyy-MM-dd hh:mm:ss”
+	private int ReadFlag; //已读或未读 （0为未读，1为已读）
+	public int getNotificationID() {
 		return NotificationID;
 	}
-	public void setNotificationID(String notificationID) {
+	public void setNotificationID(int notificationID) {
 		NotificationID = notificationID;
 	}
-	public String getUserID() {
+	public int getUserID() {
 		return UserID;
 	}
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		UserID = userID;
 	}
-	public String getToolID() {
+	public int getToolID() {
 		return ToolID;
 	}
-	public void setToolID(String toolID) {
+	public void setToolID(int toolID) {
 		ToolID = toolID;
 	}
 	public Date getNotificationTime() {
@@ -38,5 +38,5 @@ public class Notification {
 	public void setReadFlag(int readFlag) {
 		ReadFlag = readFlag;
 	}
-
+	
 }

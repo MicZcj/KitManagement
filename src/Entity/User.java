@@ -1,17 +1,17 @@
 package Entity;
 
 public class User {
-	String UserID; //用户ID
-	String UserNickname; //用户名
-	String UserPassword; //密码
-	String UserName; //姓名
-	String Email; //邮件
-	String Phone; //电话
-	String Department; //部门名称
-	public String getUserID() {
+	private int UserID; //用户ID,（数据库自增的，这个属性不要自己插入）
+	private String UserNickname; //用户名
+	private String UserPassword; //密码
+	private String UserName; //姓名
+	private String Email; //邮件
+	private String Phone; //电话
+	private String Department; //部门名称
+	public int getUserID() {
 		return UserID;
 	}
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		UserID = userID;
 	}
 	public String getUserNickname() {

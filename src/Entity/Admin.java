@@ -1,15 +1,15 @@
 package Entity;
 
 public class Admin {
-	String AdminID; //管理员ID
-	String AdminNickname; //管理员名
-	String AdminName; //管理员姓名
-	String AdminPassword; //管理员密码
-	String ToolTypeID; //管理的工具类别ID
-	public String getAdminID() {
+	private int AdminID; //管理员ID, (数据库自增的，这个属性不要自己插入)
+	private String AdminNickname; //管理员名
+	private String AdminName; //管理员姓名
+	private String AdminPassword; //管理员密码
+	private int ToolTypeID; //管理的工具类别ID
+	public int getAdminID() {
 		return AdminID;
 	}
-	public void setAdminID(String adminID) {
+	public void setAdminID(int adminID) {
 		AdminID = adminID;
 	}
 	public String getAdminNickname() {
@@ -30,10 +30,10 @@ public class Admin {
 	public void setAdminPassword(String adminPassword) {
 		AdminPassword = adminPassword;
 	}
-	public String getToolTypeID() {
+	public int getToolTypeID() {
 		return ToolTypeID;
 	}
-	public void setToolTypeID(String toolTypeID) {
+	public void setToolTypeID(int toolTypeID) {
 		ToolTypeID = toolTypeID;
 	}
 
