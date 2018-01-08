@@ -1,6 +1,8 @@
 package service;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,10 +26,10 @@ public class KitShowAll extends HttpServlet {
 		int currPage=Integer.parseInt(request.getParameter("currPage")); 
 		KitDao kitDao =new KitDao();
 		PageBean<Tool> pageBean = kitDao.findByPage(currPage);
-		HttpSession session = request.getSession();
-		session.setAttribute("pageBean", pageBean.getList());
-		session.setAttribute("page", pageBean);
-		response.sendRedirect("allKit.jsp");
+		request.setAttribute("pageBean", pageBean.getList());
+		request.setAttribute("page", pageBean);
+		RequestDispatcher rd = request.getRequestDispatcher("allKit.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

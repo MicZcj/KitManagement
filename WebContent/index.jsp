@@ -50,7 +50,7 @@
 						<li class="active"><a href="index.jsp">主页</a></li>
 						<li><a href="KitShowAll.do?currPage=1">全部工具</a></li>
 						<li><a href="upload.jsp">工具上传</a></li>
-						<li><a href="center.jsp">个人中心</a></li>
+						<li><a href="center.jsp">${user.userNickname}:个人中心</a></li>
 					</ul> <!-- /.nav -->
 			    </div><!-- /.navbar-collapse -->
 		  	</div><!-- /.container -->

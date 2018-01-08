@@ -18,7 +18,7 @@
 					<li ${param.type1}><a href="index.jsp">主页</a></li>
 					<li ${param.type2}><a href="allKit.jsp">全部工具</a></li>
 					<li ${param.type3}><a href="upload.jsp">工具上传</a></li>
-					<li ${param.type4}><a href="center.jsp">个人中心</a></li>
+					<li ${param.type4}><a href="center.jsp">${user.userNickname}:个人中心</a></li>
 				</ul>
 				<!-- /.nav -->
 			</div>

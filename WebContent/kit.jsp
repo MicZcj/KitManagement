@@ -81,7 +81,7 @@
 		<ol class="breadcrumb">
 			<li><a href="index.jsp">主页</a></li>
 			<li><a href="allKit.jsp">主页</a></li>
-			<li class="active">&nbsp;PhotoShop CC 2015</li>
+			<li class="active">&nbsp;${tool.toolName}</li>
 		</ol>
 	</div>
 	<!-- /.container --> </section>
@@ -92,45 +92,45 @@
 	<section class="contact section-wrapper" id="contact">
 	<div class="container">
 		<div class="row">
-			<h1>Photoshop CC 2015</h1>
+			<h1>${tool.toolName}</h1>
 			<br>
 			<table class="table" height="500px">
 				<tr>
 					<td>工具名称</td>
-					<td>Photoshop CC 2015</td>
+					<td>${tool.toolName}</td>
 				</tr>
 				<tr>
 					<td>版本号</td>
-					<td>V15.121.49</td>
+					<td>${tool.toolEdition}</td>
 				</tr>
 				<tr>
 					<td>分类</td>
-					<td>美工工具</td>
+					<td>${tool.toolTypeName}</td>
 				</tr>
 				<tr>
 					<td>标签</td>
-					<td>图像处理;常用软件;大型软件</td>
+					<td>${tool.toolEdition}</td>
 				</tr>
 				<tr>
 					<td>文件大小</td>
-					<td>1.68G</td>
+					<td>${tool.toolEdition}</td>
 				</tr>
 				<tr>
 					<td>上传人</td>
-					<td>张昌健</td>
+					<td>${tool.userNickname}</td>
 				</tr>
 				<tr>
 					<td>上传时间</td>
-					<td>2018.1.3 23:59</td>
+					<td><%-- ${tool.toolEdition} --%></td>
 				</tr>
 				<tr>
 					<td>下载量</td>
-					<td>136次</td>
+					<td>${tool.downloadNum}</td>
 				</tr>
 				<tr>
 					<td>我要点赞</td>
 					<td><a href="CommentLike.do?toolID=1&userID=1"><button
-								type="button" class="btn btn-danger">√点赞</button></a></td>
+								type="button" class="btn btn-danger">点赞 (${tool.likeNum})</button></a></td>
 				</tr>
 				<tr>
 					<td>下载</td>
@@ -164,8 +164,8 @@
 
 		<!-- /.row -->
 		<form action="CommentSubmit.do" method="post" class="row form">
-			<input type="hidden" name="toolID" value="1"> <input
-				type="hidden" name="userID" value="1">
+			<input type="hidden" name="toolID" value="${tool.toolID}"> <input
+				type="hidden" name="userID" value="${user.userID}">
 			<h3>我要评论</h3>
 			<div class="row">
 				<div class="col-md-12 col-xs-12 form-group">

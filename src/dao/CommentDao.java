@@ -23,9 +23,9 @@ public class CommentDao extends BaseDao {
 			pstmt.setString(3, commentRecord.getComment());
 			pstmt.setDate(4, new java.sql.Date(commentRecord.getCommentTime().getTime()));
 			pstmt.setString(5, commentRecord.getReply());
-			System.out.println("next3");
+			System.out.println(commentRecord.toString());
 			pstmt.executeUpdate();
-			System.out.println("next2");
+			
 			return true;
 		} catch (SQLException se) {
 			se.printStackTrace();

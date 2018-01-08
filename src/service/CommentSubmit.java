@@ -44,9 +44,10 @@ public class CommentSubmit extends HttpServlet {
 		commentRecord.setCommentTime(date);
 		commentRecord.setToolID(Integer.parseInt(toolID));
 		commentRecord.setReply(reply);
+		commentRecord.setUserID(Integer.parseInt(userID));
 		CommentDao dao = new CommentDao();
 		if (dao.addComment(commentRecord)) {
-			RequestDispatcher rd = request.getRequestDispatcher("CommentFindAll.do?toolID=" + toolID);
+			RequestDispatcher rd = request.getRequestDispatcher("KitShowSingle.do?id=" + toolID);
 			rd.forward(request, response);
 		} else {
 			System.out.println("失败！");

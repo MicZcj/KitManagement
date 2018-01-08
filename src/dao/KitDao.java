@@ -23,13 +23,13 @@ public class KitDao extends BaseDao {
 		Double num = Math.ceil(tc / pageSize);
 		pageBean.setTotalPage(num.intValue());
 		int begin = (currPage - 1) * pageSize;
-		List<Tool> list = find(begin,begin+pageSize);
+		List<Tool> list = find(begin, begin + pageSize);
 		pageBean.setList(list);
 		return pageBean;
 	}
 
-	private List<Tool> find(int begin,int end) {
-		String sql=	"SELECT * FROM kit.tool,kit.tooltype where tool.ToolTypeID=tooltype.ToolTypeID limit ?,?;";
+	private List<Tool> find(int begin, int end) {
+		String sql = "SELECT * FROM kit.tool,kit.tooltype where tool.ToolTypeID=tooltype.ToolTypeID limit ?,?;";
 		List<Tool> tools = new ArrayList<Tool>();
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, begin);
@@ -69,6 +69,33 @@ public class KitDao extends BaseDao {
 			se.printStackTrace();
 			return count;
 		}
+	}
+
+	public Tool findById(int id) {
+		String sql = "SELECT * FROM kit.tool,kit.tooltype,kit.user where tool.ToolTypeID=tooltype.ToolTypeID AND tool.userID=user.userID AND tool.toolID=?;";
+		Tool tool = new Tool();
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				tool.setDownloadNum(Integer.parseInt(rs.getString("DownloadNum")));
+				tool.setLikeNum(Integer.parseInt(rs.getString("LikeNum")));
+				tool.setToolDescription(rs.getString("ToolDescription"));
+				tool.setToolEdition(rs.getString("ToolEdition"));
+				tool.setToolID(rs.getInt("ToolID"));
+				tool.setToolName(rs.getString("ToolName"));
+				tool.setToolPath(rs.getString("ToolPath"));
+				tool.setToolTag(rs.getString("ToolTag"));
+				tool.setToolTypeID(rs.getInt("ToolTypeID"));
+				tool.setUserID(rs.getInt("UserID"));
+				tool.setToolTypeName(rs.getString("ToolTypeName"));	
+				tool.setUserNickname(rs.getString("UserNickname"));
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
+		return tool;
 	}
 
 }
