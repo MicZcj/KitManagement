@@ -25,7 +25,7 @@ public class CommentDao extends BaseDao {
 			pstmt.setString(5, commentRecord.getReply());
 			System.out.println(commentRecord.toString());
 			pstmt.executeUpdate();
-			
+
 			return true;
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -37,7 +37,7 @@ public class CommentDao extends BaseDao {
 	// 找到该工具所有评论
 	public ArrayList<CommentRecord> findAll(String toolID) {
 		System.out.println("Dao---->findAll:根据toolID查找该工具的所有评论");
-		ArrayList<CommentRecord> list=new ArrayList<CommentRecord>();
+		ArrayList<CommentRecord> list = new ArrayList<CommentRecord>();
 		String sql = "SELECT * FROM kit.commentrecord;";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			ResultSet rs = pstmt.executeQuery();
@@ -57,8 +57,49 @@ public class CommentDao extends BaseDao {
 	}
 
 	public void pointLike(LikeRecord likeRecord) {
-		// TODO Auto-generated method stub
-		System.out.println("Dao---->pointLike:已点赞");
+		String sql = "INSERT INTO `kit`.`likerecord` (`ToolID`, `UserID`) VALUES (?, ?);";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, likeRecord.getToolID());
+			pstmt.setInt(2, likeRecord.getUserID());
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
+	}
+
+	public boolean isLike(int userID, int toolID) {
+		String sql = "SELECT * FROM `kit`.`likerecord` WHERE ToolID = ? AND UserID = ?";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, toolID);
+			pstmt.setInt(2, userID);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
+		return false;
+	}
+
+	public void likeNumPlus(int toolID) {
+		String sql = "SELECT LikeNum FROM `kit`.`tool` WHERE ToolID = ?";
+		String sql2 = "UPDATE `kit`.`tool` SET LikeNum = ? WHERE ToolID = ? ";
+		int likeNum=0;
+		try (Connection conn = dataSource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				PreparedStatement pstmt2 = conn.prepareStatement(sql2)) {
+			pstmt.setInt(1, toolID);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				likeNum = rs.getInt("LikeNum") + 1;
+			}
+			pstmt2.setInt(1, likeNum);
+			pstmt2.setInt(2, toolID);
+			pstmt2.executeUpdate();
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
 
 }

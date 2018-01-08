@@ -1,6 +1,7 @@
 package service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,9 +9,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import dao.CommentDao;
 import dao.KitDao;
+import entity.CommentRecord;
+import entity.LikeRecord;
 import entity.Tool;
+import entity.User;
 
 /**
  * Servlet implementation class KitShowSingle
@@ -22,11 +28,26 @@ public class KitShowSingle extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		int id = Integer.parseInt(request.getParameter("id"));
+		//显示工具详情
+		int toolID = Integer.parseInt(request.getParameter("toolID"));
 		KitDao kitDao = new KitDao();
-		Tool tool = kitDao.findById(id);
-		request.setAttribute("tool", tool);
-		RequestDispatcher rd = request.getRequestDispatcher("CommentFindAll.do");
+		Tool tool = kitDao.findById(toolID);
+		request.setAttribute("tool", tool);//工具信息
+		
+		//查找评论
+		String id = request.getParameter("toolID");
+		HttpSession session = request.getSession();
+		User user=(User) session.getAttribute("user");
+		int userID = user.getUserID();
+		CommentDao dao = new CommentDao();
+		ArrayList<CommentRecord> commentRecord = dao.findAll(id);
+		request.setAttribute("commentRecord", commentRecord);//评论列表
+		
+		//查找点赞
+		boolean likeRecord = dao.isLike(userID, toolID);
+		System.out.println(likeRecord+""+userID+toolID);
+		request.setAttribute("likeRecord", likeRecord);//点赞与否
+		RequestDispatcher rd = request.getRequestDispatcher("kit.jsp");
 		rd.forward(request, response);
 	}
 

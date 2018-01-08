@@ -121,7 +121,9 @@
 				</tr>
 				<tr>
 					<td>上传时间</td>
-					<td><%-- ${tool.toolEdition} --%></td>
+					<td>
+						<%-- ${tool.toolEdition} --%>
+					</td>
 				</tr>
 				<tr>
 					<td>下载量</td>
@@ -129,8 +131,17 @@
 				</tr>
 				<tr>
 					<td>我要点赞</td>
-					<td><a href="CommentLike.do?toolID=1&userID=1"><button
-								type="button" class="btn btn-danger">点赞 (${tool.likeNum})</button></a></td>
+					<td><c:if test="${likeRecord}">
+							<button type="button" class="btn btn-default" disabled="disabled">已点赞
+								(${tool.likeNum})</button>
+						</c:if> <c:if test="${!likeRecord}">
+							<a
+								href="LikeSubmit.do?toolID=${tool.toolID}&userID=${user.userID}">
+								<button type="button" class="btn btn-danger">点赞
+									(${tool.likeNum})</button>
+							</a>
+
+						</c:if></td>
 				</tr>
 				<tr>
 					<td>下载</td>

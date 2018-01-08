@@ -15,8 +15,8 @@ import entity.LikeRecord;
 /**
  * Servlet implementation class CommentLike
  */
-@WebServlet("/CommentLike.do")
-public class CommentLike extends HttpServlet {
+@WebServlet("/LikeSubmit.do")
+public class LikeSubmit extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -28,10 +28,9 @@ public class CommentLike extends HttpServlet {
 		likeRecord.setToolID(Integer.parseInt(toolID));
 		likeRecord.setUserID(Integer.parseInt(userID));
 		CommentDao dao = new CommentDao();
+		dao.likeNumPlus(Integer.parseInt(toolID));
 		dao.pointLike(likeRecord);
-		System.out.println("Servlet---->CommentLike:点赞");
-		System.out.println("Servlet---->CommentLike:查所有评论");
-		RequestDispatcher rd = request.getRequestDispatcher("CommentFindAll.do?toolID=" + toolID);
+		RequestDispatcher rd = request.getRequestDispatcher("KitShowSingle.do");
 		rd.forward(request, response);
 	}
 

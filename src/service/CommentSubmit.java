@@ -33,12 +33,6 @@ public class CommentSubmit extends HttpServlet {
 		String userID = request.getParameter("userID");
 		Date date = new Date();
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		System.out.println("Servlet---->CommentSubmit:提交评论");
-		System.out.println(format.format(date).toString());
-		System.out.println(comment);
-		System.out.println(reply);
-		System.out.println(toolID);
-		System.out.println(userID);
 		CommentRecord commentRecord = new CommentRecord();
 		commentRecord.setComment(comment);
 		commentRecord.setCommentTime(date);
@@ -47,7 +41,7 @@ public class CommentSubmit extends HttpServlet {
 		commentRecord.setUserID(Integer.parseInt(userID));
 		CommentDao dao = new CommentDao();
 		if (dao.addComment(commentRecord)) {
-			RequestDispatcher rd = request.getRequestDispatcher("KitShowSingle.do?id=" + toolID);
+			RequestDispatcher rd = request.getRequestDispatcher("KitShowSingle.do");
 			rd.forward(request, response);
 		} else {
 			System.out.println("失败！");

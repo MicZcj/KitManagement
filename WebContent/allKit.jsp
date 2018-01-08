@@ -111,7 +111,7 @@
 			<c:forEach items="${pageBean}" var="tool" varStatus="status">
 				<tr>
 					<td>${status.index+1}</td>
-					<td><a href="KitShowSingle.do?id=${tool.toolID }">${tool.toolName}</a></td>
+					<td><a href="KitShowSingle.do?toolID=${tool.toolID }">${tool.toolName}</a></td>
 					<td>${tool.toolEdition}</td>
 					<td>${tool.toolTypeName}</td>
 					<!-- 	<td>2017.11.30</td> -->
