@@ -12,12 +12,13 @@ public class UserDao extends BaseDao {
 	// 检查用户密码
 	public User checkUser(String username, String password) {
 		String sql = "SELECT * FROM kit.user where UserNickname=? AND UserPassword = ?;";
-		User user = new User();
+		User user = null;
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, username);
 			pstmt.setString(2, password);
 			ResultSet rs = pstmt.executeQuery();
-			if (rs.next())
+			if (rs.next()) {
+				user = new User();
 				user.setDepartment(rs.getString("Department"));
 				user.setEmail(rs.getString("Email"));
 				user.setPhone(rs.getString("Phone"));
@@ -25,7 +26,8 @@ public class UserDao extends BaseDao {
 				user.setUserName(rs.getString("UserName"));
 				user.setUserNickname(rs.getString("UserNickname"));
 				user.setUserPassword(rs.getString("UserPassword"));
-				return user;
+			}
+			return user;
 		} catch (SQLException se) {
 			se.printStackTrace();
 			return user;
