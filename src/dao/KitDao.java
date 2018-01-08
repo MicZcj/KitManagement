@@ -15,6 +15,7 @@ public class KitDao extends BaseDao {
 	public PageBean<Tool> findByPage(int currPage) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
+		//每页显示几条记录
 		Integer pageSize = 1;
 		pageBean.setPageSize(pageSize);
 		Integer totalCount = findCount();

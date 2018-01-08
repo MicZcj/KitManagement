@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Date;
+
 public class Tool {
 	private int toolID; // 工具ID,（数据库自增的，这个属性不要自己插入）
 	private int userID; // 上传的用户ID
@@ -13,7 +15,7 @@ public class Tool {
 	private int downloadNum; // 下载数
 	private String toolTypeName; // 工具类别名称
 	private String userNickname;
-	
+	private Date uploadTime;
 	public String getUserNickname() {
 		return userNickname;
 	}
@@ -108,6 +110,14 @@ public class Tool {
 
 	public void setToolTypeName(String toolTypeName) {
 		this.toolTypeName = toolTypeName;
+	}
+
+	public Date getUploadTime() {
+		return uploadTime;
+	}
+
+	public void setUploadTime(Date uploadTime) {
+		this.uploadTime = uploadTime;
 	}
 
 }
