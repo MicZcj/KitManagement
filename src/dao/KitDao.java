@@ -15,7 +15,7 @@ public class KitDao extends BaseDao {
 	public PageBean<Tool> findByPage(int currPage) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
-		//每页显示几条记录
+		// 每页显示几条记录
 		Integer pageSize = 1;
 		pageBean.setPageSize(pageSize);
 		Integer totalCount = findCount();
@@ -49,6 +49,7 @@ public class KitDao extends BaseDao {
 				tool.setToolTypeID(rs.getInt("ToolTypeID"));
 				tool.setUserID(rs.getInt("UserID"));
 				tool.setToolTypeName(rs.getString("ToolTypeName"));
+				
 				tools.add(tool);
 			}
 
@@ -89,8 +90,9 @@ public class KitDao extends BaseDao {
 				tool.setToolTag(rs.getString("ToolTag"));
 				tool.setToolTypeID(rs.getInt("ToolTypeID"));
 				tool.setUserID(rs.getInt("UserID"));
-				tool.setToolTypeName(rs.getString("ToolTypeName"));	
+				tool.setToolTypeName(rs.getString("ToolTypeName"));
 				tool.setUserNickname(rs.getString("UserNickname"));
+				tool.setUploadTime(rs.getDate("uploadTime"));
 			}
 
 		} catch (SQLException se) {

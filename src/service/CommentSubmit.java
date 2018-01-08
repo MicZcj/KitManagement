@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CommentDao;
+import dao.NotificationDao;
 import entity.CommentRecord;
+import entity.Notification;
 
 /**
  * Servlet implementation class Commit
@@ -31,6 +33,8 @@ public class CommentSubmit extends HttpServlet {
 		String toolID = request.getParameter("toolID");
 		String comment = request.getParameter("comment");
 		String userID = request.getParameter("userID");
+		String toUserID = request.getParameter("toUserID");
+		// 写入评论表
 		Date date = new Date();
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		CommentRecord commentRecord = new CommentRecord();
@@ -40,6 +44,14 @@ public class CommentSubmit extends HttpServlet {
 		commentRecord.setReply(reply);
 		commentRecord.setUserID(Integer.parseInt(userID));
 		CommentDao dao = new CommentDao();
+		// 写入站内通知表
+		Notification notification = new Notification();
+		notification.setNotificationTime(date);
+		notification.setReadFlag(0);
+		notification.setToolID(Integer.parseInt(toolID));
+		notification.setUserID(Integer.parseInt(toUserID));
+		NotificationDao dao2 = new NotificationDao();
+		dao2.addNotification(notification);
 		if (dao.addComment(commentRecord)) {
 			RequestDispatcher rd = request.getRequestDispatcher("KitShowSingle.do");
 			rd.forward(request, response);

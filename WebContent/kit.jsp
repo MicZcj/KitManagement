@@ -35,10 +35,10 @@
 		    	<script src="assets/js/selectivizr.js"></script>
 		    <![endif]-->
 <script type="text/javascript">
-	function jumpTo(floor, comment) {
+	function jumpTo(floor, comment, toUserID) {
 		document.getElementsByTagName('BODY')[0].scrollTop = document
 				.getElementsByTagName('BODY')[0].scrollHeight;
-		document.getElementById("label").innerHTML = "<input type=\"hidden\" id=\"reply\" name=\"reply\" value=\""+"回复" + floor + "#:" + comment+"\" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+		document.getElementById("label").innerHTML = "<input type=\"hidden\" id=\"reply\" name=\"reply\" value=\""+"回复" + floor + "#:" + comment+"\" /><input type=\"hidden\" id=\"toUserID\" name=\"toUserID\" value=\""+toUserID+"\" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 				+ "回复" + floor + "#:" + comment;
 		alert("正确");
 	}
@@ -122,7 +122,7 @@
 				<tr>
 					<td>上传时间</td>
 					<td>
-						<%-- ${tool.toolEdition} --%>
+						${tool.uploadTime} 
 					</td>
 				</tr>
 				<tr>
@@ -166,7 +166,7 @@
 					&nbsp;&nbsp; ${comment.comment} <br>
 					<div align="right">
 						<button type="button" class="btn btn-primary"
-							onclick="jumpTo('${status.index+1}','${comment.comment}');">&nbsp;回&nbsp;复&nbsp;</button>
+							onclick="jumpTo('${status.index+1}','${comment.comment}','${comment.userID}');">&nbsp;回&nbsp;复&nbsp;</button>
 						&nbsp;&nbsp;&nbsp;
 					</div>
 				</div>

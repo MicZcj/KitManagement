@@ -112,7 +112,7 @@
 					<div class="portfolio-img">
 						<img src="assets/images/port-3.png" alt="port-3" class="port-item">
 						<div class="portfolio-img-hover">
-							<a href="center_message.jsp"><img
+							<a href="NotificationShow.do"><img
 								src="assets/images/plus.png" alt="plus" class="plus"></a>
 						</div>
 						<!-- /.portfolio-img-hover -->
