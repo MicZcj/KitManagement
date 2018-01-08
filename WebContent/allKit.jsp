@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
 <!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
@@ -35,9 +37,32 @@
 
 <body>
 
-	<jsp:include page="header.jsp">
-		<jsp:param name="type2" value="class=\"active\"" />
-	</jsp:include>
+	<!-- Home -->
+	<section class="portfolio-header" id="header"> <nav
+		class="navbar navbar-default">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+
+			<a class="navbar-brand" href="index.jsp">工具管理系统</a>
+		</div>
+		<!-- /.navbar-header -->
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="index.jsp">主页</a></li>
+				<li class="active"><a href="allKit.jsp">全部工具</a></li>
+				<li><a href="upload.jsp">工具上传</a></li>
+				<li><a href="center.jsp">个人中心</a></li>
+			</ul>
+			<!-- /.nav -->
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container --> </nav> </section>
+	<!-- /#header -->
 
 
 	<!-- Section Background -->
@@ -79,98 +104,37 @@
 				<th>名称</th>
 				<th>版本号</th>
 				<th>类别</th>
-				<th>上传时间</th>
+				<!-- <th>上传时间</th> -->
 				<th>下载量<a href="">↓</a></th>
 				<th>点赞数<a href="">↑</a></th>
 			</tr>
-			<tr>
-				<td>1</td>
-				<td><a href="kit.jsp">photoshop</a></td>
-				<td>V12.51.1135</td>
-				<td>图像处理</td>
-				<td>2017.11.30</td>
-				<td>235</td>
-				<td>144</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td><a href="kit.jsp">eclipse</a></td>
-				<td>201710</td>
-				<td>编译器</td>
-				<td>2018.1.5</td>
-				<td>713</td>
-				<td>200</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td><a href="kit.jsp">git</a></td>
-				<td>v6</td>
-				<td>项目管理</td>
-				<td>2017.1.3</td>
-				<td>60</td>
-				<td>13</td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td><a href="kit.jsp">photoshop</a></td>
-				<td>V12.51.1135</td>
-				<td>图像处理</td>
-				<td>2017.11.30</td>
-				<td>235</td>
-				<td>144</td>
-			</tr>
-			<tr>
-				<td>5</td>
-				<td><a href="kit.jsp">eclipse</a></td>
-				<td>201710</td>
-				<td>编译器</td>
-				<td>2018.1.5</td>
-				<td>713</td>
-				<td>200</td>
-			</tr>
-			<tr>
-				<td>6</td>
-				<td><a href="kit.jsp">git</a></td>
-				<td>v6</td>
-				<td>项目管理</td>
-				<td>2017.1.3</td>
-				<td>60</td>
-				<td>13</td>
-			</tr>
-			<tr>
-				<td>7</td>
-				<td><a href="kit.jsp">photoshop</a></td>
-				<td>V12.51.1135</td>
-				<td>图像处理</td>
-				<td>2017.11.30</td>
-				<td>235</td>
-				<td>144</td>
-			</tr>
-			<tr>
-				<td>8</td>
-				<td><a href="kit.jsp">eclipse</a></td>
-				<td>201710</td>
-				<td>编译器</td>
-				<td>2018.1.5</td>
-				<td>713</td>
-				<td>200</td>
-			</tr>
-			<tr>
-				<td>9</td>
-				<td><a href="kit.jsp">git</a></td>
-				<td>v6</td>
-				<td>项目管理</td>
-				<td>2017.1.3</td>
-				<td>60</td>
-				<td>13</td>
-			</tr>
-		</table>
+			<c:forEach items="${pageBean}" var="tool" varStatus="status">
+				<tr>
+					<td>${status.index+1}</td>
+					<td><a href="kit.jsp">${tool.toolName}</a></td>
+					<td>${tool.toolEdition}</td>
+					<td>${tool.toolTypeName}</td>
+					<!-- 	<td>2017.11.30</td> -->
+					<td>${tool.downloadNum}</td>
+					<td>${tool.likeNum}</td>
+				</tr>
+			</c:forEach>
+			<table align="center">
+				<tr>
+					<td align="right"><span>第${page.currPage}/${page.totalPage}页
+					</span>&nbsp;&nbsp; <span>总记录数：${page.totalCount}&nbsp;&nbsp;每页显示：${page.pageSize}条
+					</span>&nbsp;&nbsp; <span> <c:if test="${page.currPage != 1}">
+								<a href="KitShowAll.do?currPage=1">[首页]</a>&nbsp;&nbsp; 
+			<a href="KitShowAll.do?currPage=${page.currPage-1}">[上一页]</a>&nbsp;&nbsp;
+			</c:if> <c:if test="${page.currPage != page.totalPage}">
+								<a href="KitShowAll.do?currPage=${page.currPage+1}">[下一页]</a>&nbsp;&nbsp; 
+			<a href="KitShowAll.do?currPage=${page.totalPage}">[尾页]</a>&nbsp;&nbsp;
+		</c:if>
+					</span></td>
+				</tr>
+			</table>
+			</section>
 
-	</div>
-	</section>
-
-	<%@ include file="footer.jsp"%>
-
-
+			<%@ include file="footer.jsp"%>
 </body>
 </html>
