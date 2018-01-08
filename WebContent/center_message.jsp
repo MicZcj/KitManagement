@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
 <!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
@@ -60,23 +62,26 @@
 			<h1>站内通知</h1>
 			<br>
 
-
-			<div class="panel panel-danger">
-				<div class="panel-heading">【未读】[2018.1.3 23:09] 新消息提醒：标题标题标题标题</div>
-				<div class="panel-body">内容内容内容</div>
-			</div>
-			<div class="panel panel-primary">
-				<div class="panel-heading">[2018.1.3 22:09] 新消息提醒：标题标题标题标题</div>
-				<div class="panel-body">内容内容内容</div>
-			</div>
-			<div class="panel panel-primary">
-				<div class="panel-heading">[2018.1.3 21:09] 新消息提醒：标题标题标题标题</div>
-				<div class="panel-body">内容内容内容</div>
-			</div>
-			<div class="panel panel-primary">
-				<div class="panel-heading">[2018.1.3 20:09] 新消息提醒：标题标题标题标题</div>
-				<div class="panel-body">内容内容内容</div>
-			</div>
+			<c:forEach items="${list}" var="item" varStatus="status">
+				<c:if test="${item.readFlag ==0 }">
+					<div class="panel panel-danger">
+						<div class="panel-heading">【未读】[${item.notificationTime}]
+							新消息提醒：${item.toolName}有新的评论！</div>
+						<div class="panel-body">
+							您在工具[ ${item.toolName} ]下的评论有新的回复&nbsp;&nbsp;&nbsp;&nbsp;<a href="KitShowSingle.do?toolID=${item.toolID}">点击此处查看</a>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${item.readFlag ==1 }">
+					<div class="panel panel-primary">
+						<div class="panel-heading">【已读】[${item.notificationTime}]
+						${item.toolName}有新的评论！</div>
+						<div class="panel-body">
+							您在工具[ ${item.toolName} ]下的评论有新的回复&nbsp;&nbsp;&nbsp;&nbsp;<a href="KitShowSingle.do?toolID=${item.toolID}">点击此处查看</a>
+						</div>
+					</div>
+				</c:if>
+			</c:forEach>
 
 
 
