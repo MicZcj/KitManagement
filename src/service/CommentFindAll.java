@@ -1,4 +1,4 @@
-package Service;
+package service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Dao.CommentDao;
-import Entity.CommentRecord;
+import dao.CommentDao;
+import entity.CommentRecord;
 
 /**
  * Servlet implementation class CommentFindAll

@@ -1,4 +1,4 @@
-package Service;
+package service;
 
 import java.awt.image.SampleModel;
 import java.io.IOException;
@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Dao.CommentDao;
-import Entity.CommentRecord;
+import dao.CommentDao;
+import entity.CommentRecord;
 
 /**
  * Servlet implementation class Commit
@@ -41,8 +41,8 @@ public class CommentSubmit extends HttpServlet {
 		System.out.println(userID);
 		CommentRecord commentRecord = new CommentRecord();
 		commentRecord.setComment(comment);
-		commentRecord.setCommentTime(format.format(date).toString());
-		commentRecord.setToolID(toolID);
+		commentRecord.setCommentTime(date);
+		commentRecord.setToolID(Integer.parseInt(toolID));
 		commentRecord.setReply(reply);
 		CommentDao dao = new CommentDao();
 		if (dao.addComment(commentRecord)) {

@@ -1,4 +1,4 @@
-package Service;
+package service;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Dao.CommentDao;
-import Entity.LikeRecord;
+import dao.CommentDao;
+import entity.LikeRecord;
 
 /**
  * Servlet implementation class CommentLike
@@ -25,8 +25,8 @@ public class CommentLike extends HttpServlet {
 		String toolID = request.getParameter("toolID");
 		String userID = request.getParameter("userID");
 		LikeRecord likeRecord = new LikeRecord();
-		likeRecord.setToolID(toolID);
-		likeRecord.setUserID(userID);
+		likeRecord.setToolID(Integer.parseInt(toolID));
+		likeRecord.setUserID(Integer.parseInt(userID));
 		CommentDao dao = new CommentDao();
 		dao.pointLike(likeRecord);
 		System.out.println("Servlet---->CommentLike:点赞");

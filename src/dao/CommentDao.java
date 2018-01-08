@@ -1,9 +1,9 @@
-package Dao;
+package dao;
 
 import java.util.ArrayList;
 
-import Entity.CommentRecord;
-import Entity.LikeRecord;
+import entity.CommentRecord;
+import entity.LikeRecord;
 
 public class CommentDao extends BaseDao {
 	//添加评论
