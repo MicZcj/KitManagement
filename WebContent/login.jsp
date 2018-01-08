@@ -40,9 +40,6 @@
 </head>
 
 <body>
-	<jsp:include page="header.jsp">
-		<jsp:param name="type1" value="class=\"active\"" />
-	</jsp:include>
 
 	<!-- Top content -->
 	<div class="top-content">
@@ -68,19 +65,20 @@
 							<div class="form-top-right"></div>
 						</div>
 						<div class="form-bottom">
-							<form role="form" action="" method="post" class="login-form">
+							<form role="form" action="UserLogin.do" method="post"
+								class="login-form">
 								<div class="form-group">
 									<label class="sr-only" for="form-username">用户名</label> <input
-										type="text" name="form-username" placeholder="Username..."
+										type="text" name="username" placeholder="Username..."
 										class="form-username form-control" id="form-username">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-password">密码</label> <input
-										type="password" name="form-password" placeholder="Password..."
+										type="password" name="password" placeholder="Password..."
 										class="form-password form-control" id="form-password">
 								</div>
-								若你还没有账户，请<a href="register.jsp">点击此处注册</a>！<br> &nbsp; <a
-									href="index.jsp"><button type="button" class="btn">登陆</button></a>
+								若你还没有账户，请<a href="register.jsp">点击此处注册</a>！<br> &nbsp;
+								<button type="button" class="btn" onclick="this.form.submit()">登陆</button>
 							</form>
 						</div>
 					</div>
