@@ -76,25 +76,29 @@
 	<!-- /.container --> </section>
 	<!-- /.section-background -->
 
-	<!-- Contact with us -->
-	<section class="contact section-wrapper" id="contact">
+	<!-- Contact with us -->	
+	<section  class="contact section-wrapper" id="contact">
 	<div class="container">
 		<h1>工具检索</h1>
 		<br>
+		<form action="KitShowAll.do" method="post">
 		<table border="0">
 			<tr>
-				<td><select class="form-control">
-						<option>请选择</option>
-						<option>名称</option>
-						<option>描述</option>
-						<option>发布者</option>
-						<option>标签</option>
+				<td><select name="select" class="form-control">
+						<option value="0">请选择</option>
+						<option value="1">名称</option>
+						<option value="2">描述</option>
+						<option value="3">发布者</option>
+						<option value="4">标签</option>
 				</select></td>
-				<td width="500px"><input name="" class="form-control"
+				<td width="500px"><input name="keyword" class="form-control"
 					type="text" placeholder="请输入关键词"></td>
 				<td><button type="submit" class="btn btn-primary">&nbsp;&nbsp;搜&nbsp;&nbsp;索&nbsp;&nbsp;</button></td>
 			</tr>
 		</table>
+		</form>
+		</div>
+		</section>
 		<br>
 		<h1>工具列表</h1>
 		<br>
@@ -105,13 +109,13 @@
 				<th>版本号</th>
 				<th>类别</th>
 				<!-- <th>上传时间</th> -->
-				<th>下载量<a href="">↓</a></th>
-				<th>点赞数<a href="">↑</a></th>
+				<th>下载量<a href="KitShowAllbydownloadnum.do">↓</a></th>
+				<th>点赞数<a href="KitShowAllbylikenum.do">↑</a></th>
 			</tr>
 			<c:forEach items="${pageBean}" var="tool" varStatus="status">
 				<tr>
 					<td>${status.index+1}</td>
-					<td><a href="KitShowSingle.do?toolID=${tool.toolID }">${tool.toolName}</a></td>
+					<td><a href="KitShowSingle.do?id=${tool.toolID }">${tool.toolName}</a></td>
 					<td>${tool.toolEdition}</td>
 					<td>${tool.toolTypeName}</td>
 					<!-- 	<td>2017.11.30</td> -->
