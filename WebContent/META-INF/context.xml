@@ -8,6 +8,6 @@
       username="root"
       maxWait="5000"
       driverClassName="com.mysql.jdbc.Driver"
-      password="zcj652584"
+      password="Zzc879037516"
       url="jdbc:mysql://localhost:3306/kit?characterEncoding=utf-8"/>
 </Context>

@@ -33,5 +33,25 @@ public class UserDao extends BaseDao {
 			return user;
 		}
 	}
+	//增加用戶
+	public boolean addUser(User user) {
+		String sql = "insert into User"
+				+ "(UserID,UserNickname,UserPassword,UserName,Email,Phone,Department)"
+				+ "VALUES(?,?,?,?,?,?,?)";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setLong(1,user.getUserID());
+			pstmt.setString(2, user.getUserNickname());
+			pstmt.setString(3, user.getUserPassword());
+			pstmt.setString(4, user.getUserName());
+			pstmt.setString(5, user.getEmail());
+			pstmt.setString(6, user.getPhone());
+			pstmt.setString(7, user.getDepartment());
+			pstmt.executeUpdate();
+			return true;
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return false;
+		}
+	}
 
 }

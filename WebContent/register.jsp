@@ -68,16 +68,16 @@
 							<div class="form-top-right"></div>
 						</div>
 						<div class="form-bottom">
-							<form role="form" action="" method="post" class="login-form">
+							<form role="form" action="UserRegister.do" method="post" class="login-form">
 								<div class="form-group">
 									<label class="sr-only" for="form-username">用户名</label> <input
-										type="text" name="form-username" placeholder="用户名"
-										class="form-username form-control" id="form-username">
+										type="text" name="userNickname" placeholder="用户名"
+										class="form-username form-control" id="userNickname">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-password">密码</label> <input
-										type="password" name="form-password" placeholder="密码"
-										class="form-password form-control" id="form-password">
+										type="password" name="userPassword" placeholder="密码"
+										class="form-password form-control" id="userPassword">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-password">重复输入</label> <input
@@ -86,31 +86,26 @@
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-username">姓名</label> <input
-										type="text" name="form-username" placeholder="姓名"
-										class="form-username form-control" id="form-username">
-								</div>
-								<div class="form-group">
-									<label class="sr-only" for="form-username">出生日期</label> <input
-										type="text" name="form-username" placeholder="出生日期"
-										class="form-username form-control" id="form-username">
+										type="text" name="userName" placeholder="姓名"
+										class="form-username form-control" id="userName">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-username">电子邮箱</label> <input
-										type="text" name="form-username" placeholder="电子邮箱"
-										class="form-username form-control" id="form-username">
+										type="text" name="email" placeholder="电子邮箱"
+										class="form-username form-control" id="email">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-username">联系电话</label> <input
-										type="text" name="form-username" placeholder="联系电话"
-										class="form-username form-control" id="form-username">
+										type="text" name="phone" placeholder="联系电话"
+										class="form-username form-control" id="phone">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-username">所在部门</label> <input
-										type="text" name="form-username" placeholder="所在部门"
-										class="form-username form-control" id="form-username">
+										type="text" name="department" placeholder="所在部门"
+										class="form-username form-control" id="department">
 								</div>
 
-								<a href="login.jsp"><button type="button" class="btn">注册</button></a>
+								<a href="login.jsp"><button type="submit" class="btn">注册</button></a>
 							</form>
 						</div>
 					</div>
