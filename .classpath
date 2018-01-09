@@ -6,5 +6,7 @@
 	<classpathentry kind="lib" path="F:/java web/apache-tomcat-7.0.75/lib/standard.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.5"/>
+	<classpathentry kind="lib" path="F:/java web/tomcat8.5/mysql-connector-java-5.1.41-bin.jar"/>
+	<classpathentry kind="lib" path="F:/java web/tomcat8.5/lib/jstl.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -9,6 +9,7 @@ import java.util.List;
 
 import entity.PageBean;
 import entity.Tool;
+import entity.ToolType;
 
 public class KitDao extends BaseDao {
 
@@ -99,6 +100,25 @@ public class KitDao extends BaseDao {
 			se.printStackTrace();
 		}
 		return tool;
+	}
+	/**查找所有工具类型 */
+	public List<ToolType> findToolType()
+	{
+		List<ToolType> result=new ArrayList();
+		String sql ="Select * from tooltype";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ToolType tooltype = new ToolType();
+				tooltype.setToolTypeID(rs.getInt("ToolTypeID"));
+				tooltype.setToolTypeName(rs.getString("ToolTypeName"));
+				result.add(tooltype);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return result;		
 	}
 
 }

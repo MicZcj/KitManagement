@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
 <!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
@@ -75,12 +77,10 @@
 					</tr>
 					<tr>
 						<td>分类</td>
-						<td><select class="form-control">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+						<td><select id="type" class="form-control">
+						<c:forEach items="${tooltypelist}" var="tooltype" varStatus="status">
+								<option value="${tooltype.toolTypeID}">${tooltype.toolTypeName}</option>
+								</c:forEach>
 						</select></td>
 					</tr>
 					<tr>
