@@ -9,6 +9,7 @@ import java.util.List;
 
 import entity.PageBean;
 import entity.Tool;
+import entity.ToolType;
 
 public class KitDao extends BaseDao {
 
@@ -741,6 +742,67 @@ public class KitDao extends BaseDao {
 			se.printStackTrace();
 		}
 		return tool;
+	}
+	/**查找所有工具类型 */
+	public List<ToolType> findToolType()
+	{
+		List<ToolType> result=new ArrayList();
+		String sql ="Select * from tooltype";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ToolType tooltype = new ToolType();
+				tooltype.setToolTypeID(rs.getInt("ToolTypeID"));
+				tooltype.setToolTypeName(rs.getString("ToolTypeName"));
+				result.add(tooltype);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return result;		
+	}
+	public boolean addTool(Tool tool) {
+		String sql = "insert into tool"
+				+ "(ToolID,UserID,ToolName,ToolDescription,ToolEdition,ToolTypeID,ToolTag,ToolPath,uploadTime,DownloadNum,LikeNum)"
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setLong(1,tool.getToolID());
+			pstmt.setLong(2,tool.getUserID());
+			pstmt.setString(3,tool.getToolName());
+			pstmt.setString(4,tool.getToolDescription());
+			pstmt.setString(5,tool.getToolEdition());
+			pstmt.setLong(6,tool.getToolID());
+			pstmt.setString(7,tool.getToolTag());
+			pstmt.setString(8,tool.getToolPath());
+			pstmt.setDate(9,new java.sql.Date(tool.getUploadTime().getTime()));
+			pstmt.setLong(10,tool.getDownloadNum());
+			pstmt.setLong(11,tool.getLikeNum());
+			pstmt.executeUpdate();
+			return true;
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return false;
+		}
+	}
+
+	public int findToolId(String name)
+	{
+		List<ToolType> result=new ArrayList();
+		String sql ="Select ToolTypeID from tooltype where ToolTypeName=?";
+		int id=0;
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1,name);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				id=rs.getInt("ToolTypeID");
+			}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return id;		
 	}
 
 }
