@@ -154,30 +154,33 @@
 						</blockquote>
 					</c:if>
 					&nbsp;&nbsp; ${comment.comment} <br>
+					<c:if test="${fn:length(admin.adminNickname)<=0}">
 					<div align="right">
 						<button type="button" class="btn btn-primary"
 							onclick="jumpTo('${status.index+1}','${comment.comment}','${comment.userID}');">&nbsp;回&nbsp;复&nbsp;</button>
 						&nbsp;&nbsp;&nbsp;
 					</div>
+					</c:if>
 				</div>
 			</div>
 		</c:forEach>
-
-		<!-- /.row -->
-		<form action="CommentSubmit.do" method="post" class="row form">
-			<input type="hidden" name="toolID" value="${tool.toolID}"> <input
-				type="hidden" name="userID" value="${user.userID}">
-			<h3>我要评论</h3>
-			<div class="row">
-				<div class="col-md-12 col-xs-12 form-group">
-					<p id="label"></p>
-					<textarea name="comment" id="commit" class="message form-control"
-						placeholder="请在此输入"></textarea>
+		<c:if test="${fn:length(admin.adminNickname)<=0}">
+			<!-- /.row -->
+			<form action="CommentSubmit.do" method="post" class="row form">
+				<input type="hidden" name="toolID" value="${tool.toolID}"> <input
+					type="hidden" name="userID" value="${user.userID}">
+				<h3>我要评论</h3>
+				<div class="row">
+					<div class="col-md-12 col-xs-12 form-group">
+						<p id="label"></p>
+						<textarea name="comment" id="commit" class="message form-control"
+							placeholder="请在此输入"></textarea>
+					</div>
+					<!-- /.form-group -->
+					<input class="btn btn-sub" type="submit" value="提交">
 				</div>
-				<!-- /.form-group -->
-				<input class="btn btn-sub" type="submit" value="提交">
-			</div>
-		</form>
+			</form>
+		</c:if>
 		<!-- /.row -->
 	</div>
 	<!-- /.container --> </section>

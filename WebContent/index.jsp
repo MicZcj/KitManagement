@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
 <!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
@@ -50,7 +52,7 @@
 						<li class="active"><a href="index.jsp">主页</a></li>
 						<li><a href="showAlltool.do?currPage=1">全部工具</a></li>
 						<li><a href="ShowUpload.do">工具上传</a></li>
-						<li><a href="center.jsp">${user.userNickname}:个人中心</a></li>
+						<c:if test="${fn:length(admin.adminNickname)<=0}"><li><a href="center.jsp">${user.userNickname}${admin.adminNickname}:个人中心</a></li></c:if>
 					</ul> <!-- /.nav -->
 			    </div><!-- /.navbar-collapse -->
 		  	</div><!-- /.container -->

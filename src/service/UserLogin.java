@@ -35,6 +35,8 @@ public class UserLogin extends HttpServlet {
 			return;
 		} else {
 			HttpSession session = request.getSession();
+			session.removeAttribute("admin");
+			session.removeAttribute("user");
 			session.setAttribute("user", user);
 			response.sendRedirect("index.jsp");
 		}

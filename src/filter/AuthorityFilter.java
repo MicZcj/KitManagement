@@ -33,7 +33,7 @@ public class AuthorityFilter implements Filter {
 		// 如果session作用域的user为null，表明没有登录
 		// 即用户请求的既不是登录页面，也不是处理登录的页面
 		if ((session.getAttribute("user") == null &&session.getAttribute("admin")==null)&& !requestPath.endsWith(loginPage) && !requestPath.endsWith(proLogin)
-				&& !requestPath.contains("assets") && !requestPath.contains("login")) {
+				&& !requestPath.contains("assets") && !requestPath.contains("login")&& !requestPath.contains("egister")) {
 			// 转发到登录页面
 			request.getRequestDispatcher(loginPage).forward(request, response);
 		} else {

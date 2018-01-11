@@ -42,6 +42,8 @@ public class AdminLogin extends HttpServlet {
 			rd = request.getRequestDispatcher("admin_login.jsp");
 		} else {
 			HttpSession session = request.getSession();
+			session.removeAttribute("admin");
+			session.removeAttribute("user");
 			session.setAttribute("admin", admin);
 			if(admin.getToolTypeID()==0)
 				rd = request.getRequestDispatcher("admin_index.jsp");

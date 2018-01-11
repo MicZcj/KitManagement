@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- Home -->
 <section class="portfolio-header" id="header">
 	<nav class="navbar navbar-default">
@@ -18,7 +19,8 @@
 					<li ${param.type1}><a href="index.jsp">主页</a></li>
 					<li ${param.type2}><a href="showAlltool.do?currPage=1">全部工具</a></li>
 					<li ${param.type3}><a href="ShowUpload.do">工具上传</a></li>
-					<li ${param.type4}><a href="center.jsp">${user.userNickname}:个人中心</a></li>
+					<c:if test="${fn:length(admin.adminNickname)<=0}"><li ${param.type4}><a href="center.jsp">${user.userNickname}${admin.adminNickname}:个人中心</a></li></c:if>
+					<li><a href="login.jsp">退出登录</a></li>
 				</ul>
 				<!-- /.nav -->
 			</div>

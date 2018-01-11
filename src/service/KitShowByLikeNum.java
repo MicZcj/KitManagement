@@ -30,7 +30,16 @@ public class KitShowByLikeNum extends HttpServlet {
 		String select = (String) request.getSession().getAttribute("select");
 		String keyword = (String) request.getSession().getAttribute("keyword");
 		KitDao kitDao =new KitDao();
-		if(select.equals("1")){
+		if(select.equals("0")){
+			PageBean<Tool> pageBean = kitDao.findByLikeNumDesc(currPage, pagesize);
+			request.setAttribute("pageBean", pageBean.getList());
+			request.setAttribute("page", pageBean);
+			select = "5";
+			request.getSession().setAttribute("select", select);
+			RequestDispatcher rd = request.getRequestDispatcher("allKit.jsp");
+			rd.forward(request, response);
+		}
+		else if(select.equals("1")){
 			PageBean<Tool> pageBean = kitDao.findByNameASC(keyword, currPage,pagesize);
 			request.setAttribute("pageBean", pageBean.getList());
 			request.setAttribute("page", pageBean);

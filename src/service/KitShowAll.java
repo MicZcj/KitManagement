@@ -73,11 +73,27 @@ public class KitShowAll extends HttpServlet {
 						}
 				}
 				else{
-					PageBean<Tool> pageBean = kitDao.findByPage(currPage,pagesize);
-					request.setAttribute("pageBean", pageBean.getList());
-					request.setAttribute("page", pageBean);
-					RequestDispatcher rd = request.getRequestDispatcher("allKit.jsp");
-					rd.forward(request, response);
+					if(select.equals("0")){
+						PageBean<Tool> pageBean = kitDao.findByDownloadnumDesc(currPage, pagesize);
+						request.setAttribute("pageBean", pageBean.getList());
+						request.setAttribute("page", pageBean);
+						RequestDispatcher rd = request.getRequestDispatcher("allKit.jsp");
+						rd.forward(request, response);
+					}
+					else if(select.equals("5")){
+						PageBean<Tool> pageBean = kitDao.findByLikeNumDesc(currPage, pagesize);
+						request.setAttribute("pageBean", pageBean.getList());
+						request.setAttribute("page", pageBean);
+						RequestDispatcher rd = request.getRequestDispatcher("allKit.jsp");
+						rd.forward(request, response);
+					}
+					else{
+						PageBean<Tool> pageBean = kitDao.findByPage(currPage,pagesize);
+						request.setAttribute("pageBean", pageBean.getList());
+						request.setAttribute("page", pageBean);
+						RequestDispatcher rd = request.getRequestDispatcher("allKit.jsp");
+						rd.forward(request, response);
+					}
 				}
 			}
 			else{

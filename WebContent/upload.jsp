@@ -39,8 +39,7 @@
 		    	<script src="assets/js/selectivizr.js"></script>
 		    <![endif]-->
 		    <script type="text/javascript">
-		    if(${result})
-		    	alert("上传成功！");
+		    if(${result}) alert("上传成功！");
 		    </script>
 </head>
 

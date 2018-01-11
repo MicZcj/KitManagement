@@ -114,7 +114,7 @@ public class Upload extends HttpServlet {
 		tool.setToolTypeID(Integer.parseInt(toolTypeID));
 		boolean result = kitdao.addTool(tool);
 		if (result) {
-			RequestDispatcher rd = request.getRequestDispatcher("upload.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("ShowUpload.do");
 			request.setAttribute("result", result);
 			rd.forward(request, response);
 		}

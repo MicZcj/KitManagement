@@ -30,7 +30,14 @@ public class KitShowByDownload extends HttpServlet {
 		String select = (String) request.getSession().getAttribute("select");
 		String keyword = (String) request.getSession().getAttribute("keyword");
 		KitDao kitDao =new KitDao();
-		if(select.equals("1")){
+		if(select.equals("0")){
+			PageBean<Tool> pageBean = kitDao.findByDownloadnumDesc(currPage, pagesize);
+			request.setAttribute("pageBean", pageBean.getList());
+			request.setAttribute("page", pageBean);
+			RequestDispatcher rd = request.getRequestDispatcher("allKit.jsp");
+			rd.forward(request, response);
+		}
+		else if(select.equals("1")){
 			PageBean<Tool> pageBean = kitDao.findByNameDesc(keyword, currPage,pagesize);
 			request.setAttribute("pageBean", pageBean.getList());
 			request.setAttribute("page", pageBean);

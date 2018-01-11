@@ -21,6 +21,10 @@ public class ShowAllTool extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String select = "0";
+		request.getSession().setAttribute("select", select);
+		String keyword = "0";
+		request.getSession().setAttribute("keyword", keyword);
 		int flag = 3;
 		int pagesize = 15;
 		request.getSession().setAttribute("flag",flag);
