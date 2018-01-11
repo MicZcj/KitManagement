@@ -51,9 +51,10 @@ public class Down extends HttpServlet {
 		 * 如果不是，说明有人盗连了你的下载地址，用自己写的一个表单，来提交，为了能跳过你上一页里的javascript的验证等目的。
 		 */
 		String referer = request.getHeader("referer");
-		if (referer == null || !referer.startsWith("http://localhost")) {
+		//如果不是从kit.jsp过来，那么就阻止下载
+		if (!referer.equals("http://localhost:8080/KitTest/kit.jsp")) {
 			// 是盗链者
-			response.sendRedirect("/login.jsp");
+			response.sendRedirect("/KitTest/login.jsp");
 			return;
 		}
 		
@@ -70,7 +71,7 @@ public class Down extends HttpServlet {
 		Tool tool = kitdao.findById(toolID);
 		String filepath = tool.getToolPath();
 		File file = new File(filepath);
-		//downloadExistsFile(request, response, file);
+		downloadExistsFile(request, response, file);
 	}
 
 	/**
