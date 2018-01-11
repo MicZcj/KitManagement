@@ -35,10 +35,10 @@
 		    	<script src="assets/js/selectivizr.js"></script>
 		    <![endif]-->
 <script type="text/javascript">
-	function jumpTo(floor, comment, toUserID) {
+	function jumpTo(floor, comment) {
 		document.getElementsByTagName('BODY')[0].scrollTop = document
 				.getElementsByTagName('BODY')[0].scrollHeight;
-		document.getElementById("label").innerHTML = "<input type=\"hidden\" id=\"reply\" name=\"reply\" value=\""+"回复" + floor + "#:" + comment+"\" /><input type=\"hidden\" id=\"toUserID\" name=\"toUserID\" value=\""+toUserID+"\" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+		document.getElementById("label").innerHTML = "<input type=\"hidden\" id=\"reply\" name=\"reply\" value=\""+"回复" + floor + "#:" + comment+"\" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 				+ "回复" + floor + "#:" + comment;
 		alert("正确");
 	}
@@ -122,7 +122,7 @@
 				<tr>
 					<td>上传时间</td>
 					<td>
-						${tool.uploadTime} 
+						<%-- ${tool.toolEdition} --%>
 					</td>
 				</tr>
 				<tr>
@@ -131,23 +131,15 @@
 				</tr>
 				<tr>
 					<td>我要点赞</td>
-					<td><c:if test="${likeRecord}">
-							<button type="button" class="btn btn-default" disabled="disabled">已点赞
-								(${tool.likeNum})</button>
-						</c:if> <c:if test="${!likeRecord}">
-							<a
-								href="LikeSubmit.do?toolID=${tool.toolID}&userID=${user.userID}">
-								<button type="button" class="btn btn-danger">点赞
-									(${tool.likeNum})</button>
-							</a>
-
-						</c:if></td>
+					<td><a href="CommentLike.do?toolID=1&userID=1"><button
+								type="button" class="btn btn-danger">点赞
+								(${tool.likeNum})</button></a></td>
 				</tr>
 				<tr>
 					<td>下载</td>
-					<td><button type="button" class="btn btn-success">立即下载</button></td>
+					<td><button type="button" onclick="javascript:window.location.href='/KitTest/Down?fileID=${tool.toolID}'"
+							class="btn btn-success">立即下载</button></td>
 				</tr>
-
 
 			</table>
 
@@ -166,7 +158,7 @@
 					&nbsp;&nbsp; ${comment.comment} <br>
 					<div align="right">
 						<button type="button" class="btn btn-primary"
-							onclick="jumpTo('${status.index+1}','${comment.comment}','${comment.userID}');">&nbsp;回&nbsp;复&nbsp;</button>
+							onclick="jumpTo('${status.index+1}','${comment.comment}');">&nbsp;回&nbsp;复&nbsp;</button>
 						&nbsp;&nbsp;&nbsp;
 					</div>
 				</div>
