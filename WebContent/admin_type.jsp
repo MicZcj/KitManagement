@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
@@ -37,18 +38,22 @@
 	<section class="main">
 	<div class="container">
 		<div class="row">
+		
 			<h1>工具类别设置</h1>
 			<br>
+			<form action="ToolTypenew.do" method="post" >
 			<table border="0">
 				<tr>
 					<td>新增工具类别&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td width="200px"><input name="" class="form-control"
+					<td width="200px"><input name="tooltypename" class="form-control"
 						type="text" placeholder="请输入类别名称"></td>
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;
+					    
 						<button type="submit" class="btn btn-primary">&nbsp;&nbsp;新&nbsp;&nbsp;增&nbsp;&nbsp;</button>
 					</td>
 				</tr>
 			</table>
+			</form>
 			&nbsp;<br>&nbsp;
 			<table class="table table-striped">
 				<tr>
@@ -56,31 +61,16 @@
 					<th>类别名称</th>
 					<th>操作</th>
 				</tr>
+				<c:forEach items="${tooltype}" var="tool" >
 				<tr>
-					<td>1</td>
-					<td>图像处理</td>
-					<td><a href="admin_typechange.jsp"><button type="button"
+					<td>${tool.toolTypeID}</td>
+					<td>${tool.toolTypeName}</td>
+					<td><a href="ToolTypechange?id=${tool.toolTypeID}"><button type="button"
 								class="btn btn-warning">修改</button></a>&nbsp;
-						<button type="button" class="btn btn-danger">删除</button></td>
-
+						<a href="ToolTypedelete.do?id=${tool.toolTypeID}"><button type="button" class="btn btn-danger">删除</button></a></td>
 				</tr>
-				<tr>
-					<td>2</td>
-					<td>编译器</td>
-					<td><a href="admin_typechange.jsp"><button type="button"
-								class="btn btn-warning">修改</button></a>&nbsp;
-						<button type="button" class="btn btn-danger">删除</button></td>
-
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>版本控制</td>
-					<td><a href="admin_typechange.jsp"><button type="button"
-								class="btn btn-warning">修改</button></a>&nbsp;
-						<button type="button" class="btn btn-danger">删除</button></td>
-
-				</tr>
-
+			</c:forEach>
+				
 			</table>
 
 

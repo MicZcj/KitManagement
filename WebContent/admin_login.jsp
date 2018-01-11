@@ -64,8 +64,9 @@
 							</div>
 							<div class="form-top-right"></div>
 						</div>
+						<form action="adminlogin" method="post" >
 						<div class="form-bottom">
-							<form role="form" action="" method="post" class="login-form">
+							
 								<div class="form-group">
 									<label class="sr-only" for="form-username">用户名</label> <input
 										type="text" name="form-username" placeholder="Username..."
@@ -76,7 +77,7 @@
 										type="password" name="form-password" placeholder="Password..."
 										class="form-password form-control" id="form-password">
 								</div>
-								<a href="admin_index.jsp"><button type="button" class="btn">登陆</button></a>
+							<button type="button" class="btn" onclick="this.form.submit()">登陆</button>
 							</form>
 						</div>
 					</div>

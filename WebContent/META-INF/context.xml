@@ -3,11 +3,11 @@
 <Resource
       name="jdbc/kit"
       type="javax.sql.DataSource"
-      maxActive="4"
+      maxActive="8"
       maxIdle="2"
       username="root"
-      maxWait="5000"
+      maxWait="-1"
       driverClassName="com.mysql.jdbc.Driver"
-      password="Zzc879037516"
+      password="zcj652584"
       url="jdbc:mysql://localhost:3306/kit?characterEncoding=utf-8"/>
 </Context>

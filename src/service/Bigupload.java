@@ -70,7 +70,7 @@ public class Bigupload extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String savePath = "D:\\tool";
+		String savePath = "tool/";
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setHeaderEncoding("UTF-8");
@@ -180,7 +180,7 @@ public class Bigupload extends HttpServlet {
 				file.delete();
 			}
 			// 清除文件夹
-			File tempFile = new File("D:/tool" + "/fileMd5/" + fileMd5);
+			File tempFile = new File("tool" + "/fileMd5/" + fileMd5);
 			if (tempFile.isDirectory() && tempFile.exists()) {
 				tempFile.delete();
 			}

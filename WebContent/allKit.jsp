@@ -34,35 +34,12 @@
 		    	<script src="assets/js/selectivizr.js"></script>
 		    <![endif]-->
 </head>
-
+${alert}
 <body>
 
-	<!-- Home -->
-	<section class="portfolio-header" id="header"> <nav
-		class="navbar navbar-default">
-	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-
-			<a class="navbar-brand" href="index.jsp">工具管理系统</a>
-		</div>
-		<!-- /.navbar-header -->
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="index.jsp">主页</a></li>
-				<li class="active"><a href="allKit.jsp">全部工具</a></li>
-				<li><a href="upload.jsp">工具上传</a></li>
-				<li><a href="center.jsp">个人中心</a></li>
-			</ul>
-			<!-- /.nav -->
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container --> </nav> </section>
-	<!-- /#header -->
+	<jsp:include page="header.jsp">
+		<jsp:param name="type4" value="class=\"active\"" />
+	</jsp:include>
 
 
 	<!-- Section Background -->
@@ -76,29 +53,28 @@
 	<!-- /.container --> </section>
 	<!-- /.section-background -->
 
-	<!-- Contact with us -->	
-	<section  class="contact section-wrapper" id="contact">
+	<!-- Contact with us -->
+	<section class="contact section-wrapper" id="contact">
 	<div class="container">
 		<h1>工具检索</h1>
 		<br>
 		<form action="KitShowAll.do" method="post">
-		<table border="0">
-			<tr>
-				<td><select name="select" class="form-control">
-						<option value="0">请选择</option>
-						<option value="1">名称</option>
-						<option value="2">描述</option>
-						<option value="3">发布者</option>
-						<option value="4">标签</option>
-				</select></td>
-				<td width="500px"><input name="keyword" class="form-control"
-					type="text" placeholder="请输入关键词"></td>
-				<td><button type="submit" class="btn btn-primary">&nbsp;&nbsp;搜&nbsp;&nbsp;索&nbsp;&nbsp;</button></td>
-			</tr>
-		</table>
+			<table border="0">
+				<tr>
+					<td><select name="select" class="form-control">
+							<option value="0">请选择</option>
+							<option value="1">名称</option>
+							<option value="2">描述</option>
+							<option value="3">发布者</option>
+							<option value="4">标签</option>
+					</select></td>
+					<td width="500px"><input name="keyword" class="form-control"
+						type="text" placeholder="请输入关键词"></td>
+					<td><button type="submit" class="btn btn-primary">&nbsp;&nbsp;搜&nbsp;&nbsp;索&nbsp;&nbsp;</button></td>
+				</tr>
+			</table>
 		</form>
-		</div>
-		</section>
+
 		<br>
 		<h1>工具列表</h1>
 		<br>
@@ -110,12 +86,12 @@
 				<th>类别</th>
 				<!-- <th>上传时间</th> -->
 				<th>下载量<a href="KitShowAllbydownloadnum.do">↓</a></th>
-				<th>点赞数<a href="KitShowAllbylikenum.do">↑</a></th>
+				<th>点赞数<a href="KitShowAllbylikenum.do">↓<!-- ↑ --></a></th>
 			</tr>
 			<c:forEach items="${pageBean}" var="tool" varStatus="status">
 				<tr>
 					<td>${status.index+1}</td>
-					<td><a href="KitShowSingle.do?id=${tool.toolID }">${tool.toolName}</a></td>
+					<td><a href="KitShowSingle.do?toolID=${tool.toolID }">${tool.toolName}</a></td>
 					<td>${tool.toolEdition}</td>
 					<td>${tool.toolTypeName}</td>
 					<!-- 	<td>2017.11.30</td> -->
@@ -123,22 +99,24 @@
 					<td>${tool.likeNum}</td>
 				</tr>
 			</c:forEach>
-			<table align="center">
-				<tr>
-					<td align="right"><span>第${page.currPage}/${page.totalPage}页
-					</span>&nbsp;&nbsp; <span>总记录数：${page.totalCount}&nbsp;&nbsp;每页显示：${page.pageSize}条
-					</span>&nbsp;&nbsp; <span> <c:if test="${page.currPage != 1}">
-								<a href="KitShowAll.do?currPage=1">[首页]</a>&nbsp;&nbsp; 
+		</table>
+		<table align="center">
+			<tr>
+				<td align="right"><span>第${page.currPage}/${page.totalPage}页
+				</span>&nbsp;&nbsp; <span>总记录数：${page.totalCount}&nbsp;&nbsp;每页显示：${page.pageSize}条
+				</span>&nbsp;&nbsp; <span> <c:if test="${page.currPage != 1}">
+							<a href="KitShowAll.do?currPage=1">[首页]</a>&nbsp;&nbsp; 
 			<a href="KitShowAll.do?currPage=${page.currPage-1}">[上一页]</a>&nbsp;&nbsp;
 			</c:if> <c:if test="${page.currPage != page.totalPage}">
-								<a href="KitShowAll.do?currPage=${page.currPage+1}">[下一页]</a>&nbsp;&nbsp; 
+							<a href="KitShowAll.do?currPage=${page.currPage+1}">[下一页]</a>&nbsp;&nbsp; 
 			<a href="KitShowAll.do?currPage=${page.totalPage}">[尾页]</a>&nbsp;&nbsp;
 		</c:if>
-					</span></td>
-				</tr>
-			</table>
-			</section>
+				</span></td>
+			</tr>
+		</table>
+	</div>
+	</section>
 
-			<%@ include file="footer.jsp"%>
+	<%@ include file="footer.jsp"%>
 </body>
 </html>

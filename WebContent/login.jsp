@@ -36,7 +36,10 @@
 	href="assets/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="assets/ico/apple-touch-icon-57-precomposed.png">
-
+<script type="text/javascript">
+if(${result})
+ alert("修改成功！请重新登陆");
+</script>
 </head>
 
 <body>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
@@ -36,42 +37,42 @@
 	<div class="container">
 		<div class="row">
 			<div align="center">
+			<form action="Admin_Userchange.do" method="post" >
 				<h1>修改管理员</h1>
 				<br>
 				<table border="0" height="200px">
 					<tr>
 						<td>管理员id</td>
-						<td>123456</td>
+						<td>${adminid}</td>
 					</tr>
 					<tr>
 						<td>用户名</td>
-						<td><input name="" class="form-control" type="text"
-							placeholder="请输入旧密码"></td>
+						<td><input name="adminnickname" class="form-control" type="text"
+							></td>
 					</tr>
 					<tr>
 						<td>姓名</td>
-						<td><input name="" class="form-control" type="text"
-							placeholder="请输入旧密码"></td>
+						<td><input name="adminname" class="form-control" type="text"
+							></td>
 					</tr>
 					<tr>
 						<td>权限类别&nbsp;&nbsp;&nbsp;</td>
-						<td><select class="form-control">
+						<td><select class="form-control" name="toolTypeid" id="toolTypeid" >
 								<option>请选择</option>
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
+								<c:forEach items="${tooltype}" var="tool" >
+								<option value="${tool.toolTypeID}">${tool.toolTypeName}</option>
+								</c:forEach>
 						</select></td>
 					</tr>
 				</table>
 				<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="submit" class="btn btn-primary">&nbsp;&nbsp;修&nbsp;&nbsp;改&nbsp;改&nbsp;</button>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="admin_user.jsp"><button
+				<button type="submit" class="btn btn-primary">&nbsp;&nbsp;修&nbsp;&nbsp;改&nbsp;</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="AdminShowAll.do"><button
 						type="button" class="btn btn-primary">&nbsp;&nbsp;返&nbsp;&nbsp;回&nbsp;&nbsp;</button></a>
 				<br>
 				<br>
 				<br>
-
+            </form>>
 			</div>
 
 		</div>

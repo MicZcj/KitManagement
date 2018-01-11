@@ -54,7 +54,7 @@ public class Upload extends HttpServlet {
 		String toolEdition = request.getParameter("toolEdition");
 		String toolTypeID = request.getParameter("type");
 		String toolTag = request.getParameter("toolTag");
-		String toolPath = "D:/tool/toolist";
+		String toolPath = "tool/toolist";
 		// 创建文件目录
 		File tempFileDir = new File(toolPath);
 		tempFileDir.mkdir();
@@ -62,27 +62,27 @@ public class Upload extends HttpServlet {
 			tempFileDir.mkdir();
 		}
 		// 创建文件type目录
-		File typeFileDir = new File(toolPath +"/"+toolTypeID);
+		File typeFileDir = new File(toolPath + "/" + toolTypeID);
 		typeFileDir.mkdir();
 		if (!typeFileDir.exists()) {
 			typeFileDir.mkdir();
 		}
 		// 创建文件名称目录
-		File toolNameDir  = new File(toolPath +"/"+toolTypeID+"/"+toolName);
+		File toolNameDir = new File(toolPath + "/" + toolTypeID + "/" + toolName);
 		toolNameDir.mkdir();
 		if (!toolNameDir.exists()) {
 			toolNameDir.mkdir();
 		}
-		//文件拷贝
+		// 文件拷贝
 		String filename = null;
-		File tempfile = new File("D:/tool/temp");
+		File tempfile = new File("tool/temp");
 		File[] fs = tempfile.listFiles();
 		for (int i = 0; i < fs.length; i++) {
 			filename = fs[i].getName();
 		}
 		if (tempfile.exists()) { // 文件存在时
-			InputStream inStream = new FileInputStream("D:/tool/temp/" + filename); // 读入原文件
-			FileOutputStream fs1 = new FileOutputStream(toolPath +"/"+toolTypeID+"/"+toolName + "/" + filename);
+			InputStream inStream = new FileInputStream("tool/temp/" + filename); // 读入原文件
+			FileOutputStream fs1 = new FileOutputStream(toolPath + "/" + toolTypeID + "/" + toolName + "/" + filename);
 			byte[] buffer = new byte[1444];
 			int length;
 			int byteread = 0;
@@ -91,10 +91,10 @@ public class Upload extends HttpServlet {
 			}
 			inStream.close();
 		}
-		//删除temp区文件
-		File move=new File("D:/tool/temp/" + filename);
-		if(move.exists())
-		move.delete();
+		// 删除temp区文件
+		File move = new File("tool/temp/" + filename);
+		if (move.exists())
+			move.delete();
 
 		Date date = new Date();
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -102,7 +102,7 @@ public class Upload extends HttpServlet {
 		System.out.println(date);
 		Tool tool = new Tool();
 		KitDao kitdao = new KitDao();
-		tool.setToolPath(toolPath +"/"+toolTypeID+"/"+toolName + "/" + filename);
+		tool.setToolPath(toolPath + "/" + toolTypeID + "/" + toolName + "/" + filename);
 		tool.setUserID(userID);
 		tool.setToolName(toolName);
 		tool.setToolDescription(toolDescription);
@@ -114,7 +114,8 @@ public class Upload extends HttpServlet {
 		tool.setToolTypeID(Integer.parseInt(toolTypeID));
 		boolean result = kitdao.addTool(tool);
 		if (result) {
-			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("upload.jsp");
+			request.setAttribute("result", result);
 			rd.forward(request, response);
 		}
 	}

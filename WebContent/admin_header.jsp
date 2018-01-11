@@ -13,8 +13,8 @@
 	<ol class="breadcrumb">
 		<li><a href="index.jsp">前台主页</a></li>
 		<li><a href="admin_index.jsp">后台主页</a></li>
-		<li><a href="admin_user.jsp">管理员设置</a></li>
-		<li class="active"><a href="admin_type.jsp">工具类别设置</a></li>
+		<li><a href="AdminShowAll.do">管理员设置</a></li>
+		<li class="active"><a href="ToolTypeShowAll.do">工具类别设置</a></li>
 	</ol>
 </div>
 <!-- /.container --> </section>

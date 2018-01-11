@@ -21,6 +21,7 @@ public class KitShowByLikeNum extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int currPage = 1;
+		int pagesize = 15;
 		int flag = (int) request.getSession().getAttribute("flag");
 		flag = 2;
 		request.getSession().setAttribute("flag",flag);
@@ -30,7 +31,7 @@ public class KitShowByLikeNum extends HttpServlet {
 		String keyword = (String) request.getSession().getAttribute("keyword");
 		KitDao kitDao =new KitDao();
 		if(select.equals("1")){
-			PageBean<Tool> pageBean = kitDao.findbyNameASC(keyword, currPage);
+			PageBean<Tool> pageBean = kitDao.findByNameASC(keyword, currPage,pagesize);
 			request.setAttribute("pageBean", pageBean.getList());
 			request.setAttribute("page", pageBean);
 			request.getSession().setAttribute("select", select);
@@ -39,7 +40,7 @@ public class KitShowByLikeNum extends HttpServlet {
 			rd.forward(request, response);
 		}
 		else if(select.equals("2")){
-			PageBean<Tool> pageBean = kitDao.findByDescriptionASC(keyword, currPage);
+			PageBean<Tool> pageBean = kitDao.findByDescriptionASC(keyword, currPage,pagesize);
 			request.setAttribute("pageBean", pageBean.getList());
 			request.setAttribute("page", pageBean);
 			request.getSession().setAttribute("select", select);
@@ -48,7 +49,7 @@ public class KitShowByLikeNum extends HttpServlet {
 			rd.forward(request, response);
 		}
 		else if(select.equals("3")){
-			PageBean<Tool> pageBean = kitDao.findByUserASC(keyword, currPage);
+			PageBean<Tool> pageBean = kitDao.findByUserASC(keyword, currPage,pagesize);
 			request.setAttribute("pageBean", pageBean.getList());
 			request.setAttribute("page", pageBean);
 			request.getSession().setAttribute("select", select);
@@ -57,7 +58,7 @@ public class KitShowByLikeNum extends HttpServlet {
 			rd.forward(request, response);
 		}
         else{
-        	PageBean<Tool> pageBean = kitDao.findByTagASC(keyword, currPage);
+        	PageBean<Tool> pageBean = kitDao.findByTagASC(keyword, currPage,pagesize);
 			request.setAttribute("pageBean", pageBean.getList());
 			request.setAttribute("page", pageBean);
 			request.getSession().setAttribute("select", select);

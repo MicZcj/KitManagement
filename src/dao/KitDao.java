@@ -13,11 +13,11 @@ import entity.ToolType;
 
 public class KitDao extends BaseDao {
 
-	public PageBean<Tool> findByPage(int currPage) {
+	public PageBean<Tool> findByPage(int currPage, int pagesize) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
-		//每页显示几条记录
-		Integer pageSize = 1;
+		// 每页显示几条记录
+		Integer pageSize = pagesize;
 		pageBean.setPageSize(pageSize);
 		Integer totalCount = findCount();
 		pageBean.setTotalCount(totalCount);
@@ -30,17 +30,16 @@ public class KitDao extends BaseDao {
 		return pageBean;
 	}
 
-
-	//按标签查询(按点赞数升序)
-	public PageBean<Tool> findByTagASC(String tag,int currPage) {
+	// 按标签查询(按点赞数升序)
+	public PageBean<Tool> findByTagASC(String tag, int currPage, int pagesize) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
-		//每页显示几条记录
-		Integer pageSize = 1;
+		// 每页显示几条记录
+		Integer pageSize = pagesize;
 		pageBean.setPageSize(pageSize);
 		int begin = (currPage - 1) * pageSize;
-		List<Tool> list = findbyTagASC(tag,begin,pageSize);
-		Integer totalCount = list.size();
+		List<Tool> list = findbyTagASC(tag, begin, pageSize);
+		Integer totalCount = findCountbyTag(tag);
 		pageBean.setTotalCount(totalCount);
 		double tc = totalCount;
 		Double num = Math.ceil(tc / pageSize);
@@ -49,8 +48,8 @@ public class KitDao extends BaseDao {
 		return pageBean;
 	}
 
-	private List<Tool> findbyTagASC(String tag,int begin, int end){
-		String sql = "SELECT * FROM kit.tool,kit.tooltype where tool.ToolTag like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID order by LikeNum ASC limit ?,? ;";
+	private List<Tool> findbyTagASC(String tag, int begin, int end) {
+		String sql = "SELECT * FROM kit.tool,kit.tooltype where tool.ToolTag like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID order by LikeNum DESC limit ?,? ;";
 		List<Tool> tools = new ArrayList<Tool>();
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, tag);
@@ -79,16 +78,16 @@ public class KitDao extends BaseDao {
 		return tools;
 	}
 
-	//按发布者查询(按点赞数升序)
-	public PageBean<Tool> findByUserASC(String user,int currPage) {
+	// 按发布者查询(按点赞数升序)
+	public PageBean<Tool> findByUserASC(String user, int currPage, int pagesize) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
-		//每页显示几条记录
-		Integer pageSize = 1;
+		// 每页显示几条记录
+		Integer pageSize = pagesize;
 		pageBean.setPageSize(pageSize);
 		int begin = (currPage - 1) * pageSize;
-		List<Tool> list = findbyUserASC(user,begin,pageSize);
-		Integer totalCount = list.size();
+		List<Tool> list = findbyUserASC(user, begin, pageSize);
+		Integer totalCount = findCountbyUser(user);
 		pageBean.setTotalCount(totalCount);
 		double tc = totalCount;
 		Double num = Math.ceil(tc / pageSize);
@@ -97,8 +96,8 @@ public class KitDao extends BaseDao {
 		return pageBean;
 	}
 
-	private List<Tool> findbyUserASC(String user,int begin, int end){
-		String sql = "SELECT * FROM kit.tool,kit.tooltype,kit.user where user.UserNickname like concat('%',?,'%') and tool.UserID=user.UserID and tool.ToolTypeID=tooltype.ToolTypeID order by LikeNum ASC limit ?,? ;";
+	private List<Tool> findbyUserASC(String user, int begin, int end) {
+		String sql = "SELECT * FROM kit.tool,kit.tooltype,kit.user where user.UserNickname like concat('%',?,'%') and tool.UserID=user.UserID and tool.ToolTypeID=tooltype.ToolTypeID order by LikeNum DESC limit ?,? ;";
 		List<Tool> tools = new ArrayList<Tool>();
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, user);
@@ -127,16 +126,16 @@ public class KitDao extends BaseDao {
 		return tools;
 	}
 
-	//按描述查询(按点赞数升序)
-	public PageBean<Tool> findByDescriptionASC(String description,int currPage) {
+	// 按描述查询(按点赞数升序)
+	public PageBean<Tool> findByDescriptionASC(String description, int currPage, int pagesize) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
-		//每页显示几条记录
-		Integer pageSize = 1;
+		// 每页显示几条记录
+		Integer pageSize = pagesize;
 		pageBean.setPageSize(pageSize);
 		int begin = (currPage - 1) * pageSize;
-		List<Tool> list = findbyDescriptionASC(description,begin, pageSize);
-		Integer totalCount = list.size();
+		List<Tool> list = findbyDescriptionASC(description, begin, pageSize);
+		Integer totalCount = findCountbyDescription(description);
 		pageBean.setTotalCount(totalCount);
 		double tc = totalCount;
 		Double num = Math.ceil(tc / pageSize);
@@ -145,8 +144,8 @@ public class KitDao extends BaseDao {
 		return pageBean;
 	}
 
-	private List<Tool> findbyDescriptionASC(String description,int begin, int end){
-		String sql = "SELECT * FROM kit.tool,kit.tooltype where tool.ToolDescription like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID order by LikeNum ASC limit ?,? ;";
+	private List<Tool> findbyDescriptionASC(String description, int begin, int end) {
+		String sql = "SELECT * FROM kit.tool,kit.tooltype where tool.ToolDescription like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID order by LikeNum DESC limit ?,? ;";
 		List<Tool> tools = new ArrayList<Tool>();
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, description);
@@ -175,16 +174,16 @@ public class KitDao extends BaseDao {
 		return tools;
 	}
 
-	//按名字查询(按点赞数升序)
-	public PageBean<Tool> findbyNameASC(String name,int currPage) {
+	// 按名字查询(按点赞数升序)
+	public PageBean<Tool> findByNameASC(String name, int currPage, int pagesize) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
-		//每页显示几条记录
-		Integer pageSize = 1;
+		// 每页显示几条记录
+		Integer pageSize = pagesize;
 		pageBean.setPageSize(pageSize);
 		int begin = (currPage - 1) * pageSize;
-		List<Tool> list = findbyNameASC(name,begin, pageSize);
-		Integer totalCount = list.size();
+		List<Tool> list = findbyNameASC(name, begin, pageSize);
+		Integer totalCount = findCountbyName(name);
 		pageBean.setTotalCount(totalCount);
 		double tc = totalCount;
 		Double num = Math.ceil(tc / pageSize);
@@ -193,8 +192,8 @@ public class KitDao extends BaseDao {
 		return pageBean;
 	}
 
-	private List<Tool> findbyNameASC(String name,int begin, int end){
-		String sql = "SELECT * FROM kit.tool,kit.tooltype where tool.ToolName like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID order by LikeNum ASC limit ?,? ;";
+	private List<Tool> findbyNameASC(String name, int begin, int end) {
+		String sql = "SELECT * FROM kit.tool,kit.tooltype where tool.ToolName like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID order by LikeNum DESC limit ?,? ;";
 		List<Tool> tools = new ArrayList<Tool>();
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, name);
@@ -223,18 +222,15 @@ public class KitDao extends BaseDao {
 		return tools;
 	}
 
-
-
-
-	//按标签查询(按下载量降序)
-	public PageBean<Tool> findByTagDesc(String tag,int currPage) {
+	// 按标签查询(按下载量降序)
+	public PageBean<Tool> findByTagDesc(String tag, int currPage, int pagesize) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
-		//每页显示几条记录
-		Integer pageSize = 1;
+		// 每页显示几条记录
+		Integer pageSize = pagesize;
 		pageBean.setPageSize(pageSize);
 		int begin = (currPage - 1) * pageSize;
-		List<Tool> list = findbyTagDesc(tag,begin, pageSize);
+		List<Tool> list = findbyTagDesc(tag, begin, pageSize);
 		Integer totalCount = findCountbyTag(tag);
 		pageBean.setTotalCount(totalCount);
 		double tc = totalCount;
@@ -244,7 +240,7 @@ public class KitDao extends BaseDao {
 		return pageBean;
 	}
 
-	private List<Tool> findbyTagDesc(String tag,int begin, int end){
+	private List<Tool> findbyTagDesc(String tag, int begin, int end) {
 		String sql = "SELECT * FROM kit.tool,kit.tooltype where tool.ToolTag like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID limit order by DownloadNum DESC ?,? ;";
 		List<Tool> tools = new ArrayList<Tool>();
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -274,15 +270,15 @@ public class KitDao extends BaseDao {
 		return tools;
 	}
 
-	//按发布者查询(按下载量降序)
-	public PageBean<Tool> findByUserDesc(String user,int currPage) {
+	// 按发布者查询(按下载量降序)
+	public PageBean<Tool> findByUserDesc(String user, int currPage, int pagesize) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
-		//每页显示几条记录
-		Integer pageSize = 1;
+		// 每页显示几条记录
+		Integer pageSize = pagesize;
 		pageBean.setPageSize(pageSize);
 		int begin = (currPage - 1) * pageSize;
-		List<Tool> list = findbyUserDesc(user,begin, pageSize);
+		List<Tool> list = findbyUserDesc(user, begin, pageSize);
 		Integer totalCount = findCountbyUser(user);
 		pageBean.setTotalCount(totalCount);
 		double tc = totalCount;
@@ -292,7 +288,7 @@ public class KitDao extends BaseDao {
 		return pageBean;
 	}
 
-	private List<Tool> findbyUserDesc(String user,int begin, int end){
+	private List<Tool> findbyUserDesc(String user, int begin, int end) {
 		String sql = "SELECT * FROM kit.tool,kit.tooltype,kit.user where user.UserNickname like concat('%',?,'%') and tool.UserID=user.UserID and tool.ToolTypeID=tooltype.ToolTypeID order by DownloadNum DESC limit ?,? ;";
 		List<Tool> tools = new ArrayList<Tool>();
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -322,15 +318,15 @@ public class KitDao extends BaseDao {
 		return tools;
 	}
 
-	//按描述查询(按下载量降序)
-	public PageBean<Tool> findByDescriptionDesc(String description,int currPage) {
+	// 按描述查询(按下载量降序)
+	public PageBean<Tool> findByDescriptionDesc(String description, int currPage, int pagesize) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
-		//每页显示几条记录
-		Integer pageSize = 1;
+		// 每页显示几条记录
+		Integer pageSize = pagesize;
 		pageBean.setPageSize(pageSize);
 		int begin = (currPage - 1) * pageSize;
-		List<Tool> list = findbyDescriptionDesc(description,begin, pageSize);
+		List<Tool> list = findbyDescriptionDesc(description, begin, pageSize);
 		Integer totalCount = findCountbyDescription(description);
 		pageBean.setTotalCount(totalCount);
 		double tc = totalCount;
@@ -340,7 +336,7 @@ public class KitDao extends BaseDao {
 		return pageBean;
 	}
 
-	private List<Tool> findbyDescriptionDesc(String description,int begin, int end){
+	private List<Tool> findbyDescriptionDesc(String description, int begin, int end) {
 		String sql = "SELECT * FROM kit.tool,kit.tooltype where tool.ToolDescription like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID order by DownloadNum DESC limit ?,? ;";
 		List<Tool> tools = new ArrayList<Tool>();
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -370,15 +366,15 @@ public class KitDao extends BaseDao {
 		return tools;
 	}
 
-	//按名字查询(按下载量降序)
-	public PageBean<Tool> findbyNameDesc(String name,int currPage) {
+	// 按名字查询(按下载量降序)
+	public PageBean<Tool> findByNameDesc(String name, int currPage, int pagesize) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
-		//每页显示几条记录
-		Integer pageSize = 1;
+		// 每页显示几条记录
+		Integer pageSize = pagesize;
 		pageBean.setPageSize(pageSize);
 		int begin = (currPage - 1) * pageSize;
-		List<Tool> list = findbyNameDesc(name,begin,pageSize);
+		List<Tool> list = findbyNameDesc(name, begin, pageSize);
 		Integer totalCount = findCountbyName(name);
 		pageBean.setTotalCount(totalCount);
 		double tc = totalCount;
@@ -388,7 +384,7 @@ public class KitDao extends BaseDao {
 		return pageBean;
 	}
 
-	private List<Tool> findbyNameDesc(String name,int begin, int end){
+	private List<Tool> findbyNameDesc(String name, int begin, int end) {
 		String sql = "SELECT * FROM kit.tool,kit.tooltype where tool.ToolName like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID order by DownloadNum desc limit ?,? ;";
 		List<Tool> tools = new ArrayList<Tool>();
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -418,19 +414,15 @@ public class KitDao extends BaseDao {
 		return tools;
 	}
 
-
-
-
-
-	//按标签查询
-	public PageBean<Tool> findByTag(String tag,int currPage) {
+	// 按标签查询
+	public PageBean<Tool> findByTag(String tag, int currPage, int pagesize) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
-		//每页显示几条记录
-		Integer pageSize = 1;
+		// 每页显示几条记录
+		Integer pageSize = pagesize;
 		pageBean.setPageSize(pageSize);
 		int begin = (currPage - 1) * pageSize;
-		List<Tool> list = findbyTag(tag,begin, pageSize);
+		List<Tool> list = findbyTag(tag, begin, pageSize);
 		Integer totalCount = findCountbyTag(tag);
 		pageBean.setTotalCount(totalCount);
 		double tc = totalCount;
@@ -439,10 +431,10 @@ public class KitDao extends BaseDao {
 		pageBean.setList(list);
 		return pageBean;
 	}
-	
+
 	private Integer findCountbyTag(String tag) {
 		String sql = "SELECT count(*) FROM kit.tool,kit.tooltype where tool.ToolTag like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID;";
-		int count = 0;		
+		int count = 0;
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, tag);
 			ResultSet rs = pstmt.executeQuery();
@@ -455,7 +447,7 @@ public class KitDao extends BaseDao {
 		}
 	}
 
-	private List<Tool> findbyTag(String tag,int begin, int end){
+	private List<Tool> findbyTag(String tag, int begin, int end) {
 		String sql = "SELECT * FROM kit.tool,kit.tooltype where tool.ToolTag like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID limit ?,?;";
 		List<Tool> tools = new ArrayList<Tool>();
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -485,15 +477,15 @@ public class KitDao extends BaseDao {
 		return tools;
 	}
 
-	//按发布者查询
-	public PageBean<Tool> findByUser(String user,int currPage) {
+	// 按发布者查询
+	public PageBean<Tool> findByUser(String user, int currPage, int pagesize) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
-		//每页显示几条记录
-		Integer pageSize = 1;
+		// 每页显示几条记录
+		Integer pageSize = pagesize;
 		pageBean.setPageSize(pageSize);
 		int begin = (currPage - 1) * pageSize;
-		List<Tool> list = findbyUser(user,begin, pageSize);
+		List<Tool> list = findbyUser(user, begin, pageSize);
 		Integer totalCount = findCountbyUser(user);
 		pageBean.setTotalCount(totalCount);
 		double tc = totalCount;
@@ -502,10 +494,10 @@ public class KitDao extends BaseDao {
 		pageBean.setList(list);
 		return pageBean;
 	}
-	
+
 	private Integer findCountbyUser(String user) {
 		String sql = "SELECT count(*) FROM kit.tool,kit.tooltype,kit.user where user.UserNickname like concat('%',?,'%') and tool.UserID=user.UserID and tool.ToolTypeID=tooltype.ToolTypeID;";
-		int count = 0;		
+		int count = 0;
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, user);
 			ResultSet rs = pstmt.executeQuery();
@@ -518,7 +510,7 @@ public class KitDao extends BaseDao {
 		}
 	}
 
-	private List<Tool> findbyUser(String user,int begin, int end){
+	private List<Tool> findbyUser(String user, int begin, int end) {
 		String sql = "SELECT * FROM kit.tool,kit.tooltype,kit.user where user.UserNickname like concat('%',?,'%') and tool.UserID=user.UserID and tool.ToolTypeID=tooltype.ToolTypeID limit ?,?;";
 		List<Tool> tools = new ArrayList<Tool>();
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -548,15 +540,15 @@ public class KitDao extends BaseDao {
 		return tools;
 	}
 
-	//按描述查询
-	public PageBean<Tool> findByDescription(String description,int currPage) {
+	// 按描述查询
+	public PageBean<Tool> findByDescription(String description, int currPage, int pagesize) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
-		//每页显示几条记录
-		Integer pageSize = 1;
+		// 每页显示几条记录
+		Integer pageSize = pagesize;
 		pageBean.setPageSize(pageSize);
 		int begin = (currPage - 1) * pageSize;
-		List<Tool> list = findbyDescription(description,begin, pageSize);
+		List<Tool> list = findbyDescription(description, begin, pageSize);
 		Integer totalCount = findCountbyDescription(description);
 		pageBean.setTotalCount(totalCount);
 		double tc = totalCount;
@@ -565,10 +557,10 @@ public class KitDao extends BaseDao {
 		pageBean.setList(list);
 		return pageBean;
 	}
-	
+
 	private Integer findCountbyDescription(String description) {
 		String sql = "SELECT count(*) FROM kit.tool,kit.tooltype where tool.ToolDescription like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID;";
-		int count = 0;		
+		int count = 0;
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, description);
 			ResultSet rs = pstmt.executeQuery();
@@ -581,7 +573,7 @@ public class KitDao extends BaseDao {
 		}
 	}
 
-	private List<Tool> findbyDescription(String description,int begin, int end){
+	private List<Tool> findbyDescription(String description, int begin, int end) {
 		String sql = "SELECT * FROM kit.tool,kit.tooltype where tool.ToolDescription like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID limit ?,?;";
 		List<Tool> tools = new ArrayList<Tool>();
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -611,15 +603,15 @@ public class KitDao extends BaseDao {
 		return tools;
 	}
 
-	//按名字查询
-	public PageBean<Tool> findbyName(String name,int currPage) {
+	// 按名字查询
+	public PageBean<Tool> findByName(String name, int currPage, int pagesize) {
 		PageBean<Tool> pageBean = new PageBean<Tool>();
 		pageBean.setCurrPage(currPage);
-		//每页显示几条记录
-		Integer pageSize = 1;
+		// 每页显示几条记录
+		Integer pageSize = pagesize;
 		pageBean.setPageSize(pageSize);
 		int begin = (currPage - 1) * pageSize;
-		List<Tool> list = findbyName(name,begin, pageSize);
+		List<Tool> list = findbyName(name, begin, pageSize);
 		Integer totalCount = findCountbyName(name);
 		pageBean.setTotalCount(totalCount);
 		double tc = totalCount;
@@ -628,10 +620,10 @@ public class KitDao extends BaseDao {
 		pageBean.setList(list);
 		return pageBean;
 	}
-	
+
 	private Integer findCountbyName(String name) {
 		String sql = "SELECT count(*) FROM kit.tool,kit.tooltype where tool.ToolName like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID;";
-		int count = 0;		
+		int count = 0;
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, name);
 			ResultSet rs = pstmt.executeQuery();
@@ -644,7 +636,7 @@ public class KitDao extends BaseDao {
 		}
 	}
 
-	private List<Tool> findbyName(String name,int begin, int end){
+	private List<Tool> findbyName(String name, int begin, int end) {
 		String sql = "SELECT * FROM kit.tool,kit.tooltype where tool.ToolName like concat('%',?,'%') and tool.ToolTypeID=tooltype.ToolTypeID limit ?,?;";
 		List<Tool> tools = new ArrayList<Tool>();
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -734,7 +726,7 @@ public class KitDao extends BaseDao {
 				tool.setToolTag(rs.getString("ToolTag"));
 				tool.setToolTypeID(rs.getInt("ToolTypeID"));
 				tool.setUserID(rs.getInt("UserID"));
-				tool.setToolTypeName(rs.getString("ToolTypeName"));	
+				tool.setToolTypeName(rs.getString("ToolTypeName"));
 				tool.setUserNickname(rs.getString("UserNickname"));
 			}
 
@@ -743,11 +735,11 @@ public class KitDao extends BaseDao {
 		}
 		return tool;
 	}
-	/**查找所有工具类型 */
-	public List<ToolType> findToolType()
-	{
-		List<ToolType> result=new ArrayList();
-		String sql ="Select * from tooltype";
+
+	/** 查找所有工具类型 */
+	public List<ToolType> findToolType() {
+		List<ToolType> result = new ArrayList();
+		String sql = "Select * from tooltype";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -759,25 +751,26 @@ public class KitDao extends BaseDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
-		return result;		
+		}
+		return result;
 	}
+
 	public boolean addTool(Tool tool) {
 		String sql = "insert into tool"
 				+ "(ToolID,UserID,ToolName,ToolDescription,ToolEdition,ToolTypeID,ToolTag,ToolPath,uploadTime,DownloadNum,LikeNum)"
 				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setLong(1,tool.getToolID());
-			pstmt.setLong(2,tool.getUserID());
-			pstmt.setString(3,tool.getToolName());
-			pstmt.setString(4,tool.getToolDescription());
-			pstmt.setString(5,tool.getToolEdition());
-			pstmt.setLong(6,tool.getToolTypeID());
-			pstmt.setString(7,tool.getToolTag());
-			pstmt.setString(8,tool.getToolPath());
-			pstmt.setDate(9,new java.sql.Date(tool.getUploadTime().getTime()));
-			pstmt.setLong(10,tool.getDownloadNum());
-			pstmt.setLong(11,tool.getLikeNum());
+			pstmt.setLong(1, tool.getToolID());
+			pstmt.setLong(2, tool.getUserID());
+			pstmt.setString(3, tool.getToolName());
+			pstmt.setString(4, tool.getToolDescription());
+			pstmt.setString(5, tool.getToolEdition());
+			pstmt.setLong(6, tool.getToolTypeID());
+			pstmt.setString(7, tool.getToolTag());
+			pstmt.setString(8, tool.getToolPath());
+			pstmt.setDate(9, new java.sql.Date(tool.getUploadTime().getTime()));
+			pstmt.setLong(10, tool.getDownloadNum());
+			pstmt.setLong(11, tool.getLikeNum());
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException se) {
@@ -786,23 +779,45 @@ public class KitDao extends BaseDao {
 		}
 	}
 
-	public int findToolId(String name)
-	{
-		List<ToolType> result=new ArrayList();
-		String sql ="Select ToolTypeID from tooltype where ToolTypeName=?";
-		int id=0;
+	public int findToolId(String name) {
+		List<ToolType> result = new ArrayList();
+		String sql = "Select ToolTypeID from tooltype where ToolTypeName=?";
+		int id = 0;
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1,name);
+			pstmt.setString(1, name);
 			ResultSet rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
-				id=rs.getInt("ToolTypeID");
-			}			
+				id = rs.getInt("ToolTypeID");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
-		return id;		
+		}
+		return id;
+	}
+	
+	public void updateToolDLNum(int toolID){
+		String sql = "update tool set DownloadNum=DownloadNum+1 where ToolID=?;";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, toolID);
+			pstmt.executeUpdate();
+		}catch (SQLException se) {
+			se.printStackTrace();
+		}
+		
+	}
+	
+	public boolean deleteTool(int toolID){
+		String sql = "delete from tool where ToolID=?;";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, toolID);
+			pstmt.executeUpdate();
+		}catch (SQLException se) {
+			se.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 }

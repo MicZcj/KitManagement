@@ -41,7 +41,7 @@
 					<div class="col-md-6">
 						<div class="pages">
 							<h2 class="page-title">管理员设置</h2>
-							<a href="admin_user.jsp"> <img src="assets/images/port-1.png"
+							<a href="AdminShowAll.do"> <img src="assets/images/port-1.png"
 								alt="page" class="page-img img-responsive">
 							</a>
 						</div>
@@ -50,7 +50,7 @@
 					<div class="col-md-6">
 						<div class="pages">
 							<h2 class="page-title">工具类别设置</h2>
-							<a href="admin_type.jsp"> <img src="assets/images/port-3.png"
+							<a href="ToolTypeShowAll.do"> <img src="assets/images/port-3.png"
 								alt="page" class="page-img img-responsive">
 							</a>
 						</div>

@@ -9,6 +9,7 @@ import entity.LikeRecord;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class CommentDao extends BaseDao {
@@ -38,8 +39,9 @@ public class CommentDao extends BaseDao {
 	public ArrayList<CommentRecord> findAll(String toolID) {
 		System.out.println("Dao---->findAll:根据toolID查找该工具的所有评论");
 		ArrayList<CommentRecord> list = new ArrayList<CommentRecord>();
-		String sql = "SELECT * FROM kit.commentrecord;";
+		String sql = "SELECT * FROM kit.commentrecord WHERE ToolID= ?;";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, Integer.parseInt(toolID));
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				CommentRecord commentRecord = new CommentRecord();
@@ -85,7 +87,7 @@ public class CommentDao extends BaseDao {
 	public void likeNumPlus(int toolID) {
 		String sql = "SELECT LikeNum FROM `kit`.`tool` WHERE ToolID = ?";
 		String sql2 = "UPDATE `kit`.`tool` SET LikeNum = ? WHERE ToolID = ? ";
-		int likeNum=0;
+		int likeNum = 0;
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement pstmt2 = conn.prepareStatement(sql2)) {

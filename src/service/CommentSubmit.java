@@ -44,14 +44,16 @@ public class CommentSubmit extends HttpServlet {
 		commentRecord.setReply(reply);
 		commentRecord.setUserID(Integer.parseInt(userID));
 		CommentDao dao = new CommentDao();
-		// 写入站内通知表
-		Notification notification = new Notification();
-		notification.setNotificationTime(date);
-		notification.setReadFlag(0);
-		notification.setToolID(Integer.parseInt(toolID));
-		notification.setUserID(Integer.parseInt(toUserID));
-		NotificationDao dao2 = new NotificationDao();
-		dao2.addNotification(notification);
+		if (reply != null) {
+			// 写入站内通知表
+			Notification notification = new Notification();
+			notification.setNotificationTime(date);
+			notification.setReadFlag(0);
+			notification.setToolID(Integer.parseInt(toolID));
+			notification.setUserID(Integer.parseInt(toUserID));
+			NotificationDao dao2 = new NotificationDao();
+			dao2.addNotification(notification);
+		}
 		if (dao.addComment(commentRecord)) {
 			RequestDispatcher rd = request.getRequestDispatcher("KitShowSingle.do");
 			rd.forward(request, response);

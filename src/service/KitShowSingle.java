@@ -28,25 +28,28 @@ public class KitShowSingle extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		//显示工具详情
+		// 显示工具详情
 		int toolID = Integer.parseInt(request.getParameter("toolID"));
 		KitDao kitDao = new KitDao();
 		Tool tool = kitDao.findById(toolID);
-		request.setAttribute("tool", tool);//工具信息
-		
-		//查找评论
+		request.setAttribute("tool", tool);// 工具信息
+
+		// 查找评论
 		String id = request.getParameter("toolID");
-		HttpSession session = request.getSession();
-		User user=(User) session.getAttribute("user");
-		int userID = user.getUserID();
 		CommentDao dao = new CommentDao();
 		ArrayList<CommentRecord> commentRecord = dao.findAll(id);
-		request.setAttribute("commentRecord", commentRecord);//评论列表
+		request.setAttribute("commentRecord", commentRecord);// 评论列表
+
+		// 查找点赞
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			int userID = user.getUserID();
+			boolean likeRecord = dao.isLike(userID, toolID);
+			System.out.println(likeRecord + "" + userID + toolID);
+			request.setAttribute("likeRecord", likeRecord);// 点赞与否
+		}
 		
-		//查找点赞
-		boolean likeRecord = dao.isLike(userID, toolID);
-		System.out.println(likeRecord+""+userID+toolID);
-		request.setAttribute("likeRecord", likeRecord);//点赞与否
 		RequestDispatcher rd = request.getRequestDispatcher("kit.jsp");
 		rd.forward(request, response);
 	}

@@ -35,44 +35,21 @@
 		    	<script src="assets/js/selectivizr.js"></script>
 		    <![endif]-->
 <script type="text/javascript">
-	function jumpTo(floor, comment) {
+	function jumpTo(floor, comment, toUserID) {
 		document.getElementsByTagName('BODY')[0].scrollTop = document
 				.getElementsByTagName('BODY')[0].scrollHeight;
-		document.getElementById("label").innerHTML = "<input type=\"hidden\" id=\"reply\" name=\"reply\" value=\""+"回复" + floor + "#:" + comment+"\" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+		document.getElementById("label").innerHTML = "<input type=\"hidden\" id=\"reply\" name=\"reply\" value=\""+"回复" + floor + "#:" + comment+"\" /><input type=\"hidden\" id=\"toUserID\" name=\"toUserID\" value=\""+toUserID+"\" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 				+ "回复" + floor + "#:" + comment;
-		alert("正确");
+
 	}
 </script>
 </head>
 
 <body>
 
-	<!-- Home -->
-	<section class="portfolio-header" id="header"> <nav
-		class="navbar navbar-default">
-	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-
-			<a class="navbar-brand" href="index.jsp">工具管理系统</a>
-		</div>
-		<!-- /.navbar-header -->
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="index.jsp">主页</a></li>
-				<li class="active"><a href="allKit.jsp">全部工具</a></li>
-				<li><a href="upload.jsp">工具上传</a></li>
-				<li><a href="center.jsp">个人中心</a></li>
-			</ul>
-			<!-- /.nav -->
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container --> </nav> </section>
-	<!-- /#header -->
+	<jsp:include page="header.jsp">
+		<jsp:param name="type4" value="class=\"active\"" />
+	</jsp:include>
 
 
 	<!-- Section Background -->
@@ -80,7 +57,7 @@
 	<div class="container">
 		<ol class="breadcrumb">
 			<li><a href="index.jsp">主页</a></li>
-			<li><a href="allKit.jsp">主页</a></li>
+			<li><a href="allKit.jsp">全部工具</a></li>
 			<li class="active">&nbsp;${tool.toolName}</li>
 		</ol>
 	</div>
@@ -119,27 +96,48 @@
 					<td>上传人</td>
 					<td>${tool.userNickname}</td>
 				</tr>
-				<tr>
+				<%-- <tr>
 					<td>上传时间</td>
-					<td>
-						<%-- ${tool.toolEdition} --%>
-					</td>
-				</tr>
+					<td>${tool.uploadTime}</td>
+				</tr> --%>
 				<tr>
 					<td>下载量</td>
 					<td>${tool.downloadNum}</td>
 				</tr>
 				<tr>
+
 					<td>我要点赞</td>
-					<td><a href="CommentLike.do?toolID=1&userID=1"><button
-								type="button" class="btn btn-danger">点赞
-								(${tool.likeNum})</button></a></td>
+					<td><c:if test="${likeRecord}">
+							<button type="button" class="btn btn-default" disabled="disabled">已点赞
+								(${tool.likeNum})</button>
+						</c:if> <c:if test="${!likeRecord}">
+							<a
+								href="LikeSubmit.do?toolID=${tool.toolID}&userID=${user.userID}">
+								<button type="button" class="btn btn-danger"
+									<c:if test="${fn:length(admin.adminNickname)>0}">disabled="disabled"</c:if>>点赞
+									(${tool.likeNum})</button>
+							</a>
+
+						</c:if></td>
 				</tr>
+
 				<tr>
 					<td>下载</td>
-					<td><button type="button" onclick="javascript:window.location.href='/KitTest/Down?fileID=${tool.toolID}'"
+					<td><button type="button"
+							onclick="javascript:window.location.href='/KitManagement/Down?toolID=${tool.toolID}'"
 							class="btn btn-success">立即下载</button></td>
 				</tr>
+				<c:if
+					test="${admin.toolTypeID == tool.toolTypeID || admin.toolTypeID==0}">
+
+
+					<tr>
+						<td>删除工具</td>
+						<td><button type="button"
+								onclick="javascript:window.location.href='/KitManagement/DeleteTool?toolID=${tool.toolID}'"
+								class="btn btn-danger">立即删除</button></td>
+					</tr>
+				</c:if>
 
 			</table>
 
@@ -158,7 +156,7 @@
 					&nbsp;&nbsp; ${comment.comment} <br>
 					<div align="right">
 						<button type="button" class="btn btn-primary"
-							onclick="jumpTo('${status.index+1}','${comment.comment}');">&nbsp;回&nbsp;复&nbsp;</button>
+							onclick="jumpTo('${status.index+1}','${comment.comment}','${comment.userID}');">&nbsp;回&nbsp;复&nbsp;</button>
 						&nbsp;&nbsp;&nbsp;
 					</div>
 				</div>

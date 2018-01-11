@@ -51,10 +51,11 @@ public class Down extends HttpServlet {
 		 * 如果不是，说明有人盗连了你的下载地址，用自己写的一个表单，来提交，为了能跳过你上一页里的javascript的验证等目的。
 		 */
 		String referer = request.getHeader("referer");
+		System.out.println(referer);
 		//如果不是从kit.jsp过来，那么就阻止下载
-		if (!referer.equals("http://localhost:8080/KitTest/kit.jsp")) {
+		if (!referer.startsWith("http://localhost:8080/KitManagement/KitShowSingle")) {
 			// 是盗链者
-			response.sendRedirect("/KitTest/login.jsp");
+			response.sendRedirect("/KitManagement/login.jsp");
 			return;
 		}
 		
@@ -67,11 +68,14 @@ public class Down extends HttpServlet {
 		}*/
 		
 		//如果验证成功，就去找到该文件的存储路径
-		KitDao kitdao = new KitDao();
-		Tool tool = kitdao.findById(toolID);
-		String filepath = tool.getToolPath();
-		File file = new File(filepath);
-		downloadExistsFile(request, response, file);
+				KitDao kitdao = new KitDao();
+				Tool tool = kitdao.findById(toolID);
+				String filepath = tool.getToolPath();
+				File file = new File(filepath);
+				if(downloadExistsFile(request, response, file)){
+					KitDao kitDao=new KitDao();
+					kitDao.updateToolDLNum(toolID);
+				}
 	}
 
 	/**
@@ -80,48 +84,51 @@ public class Down extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		int toolID =Integer.parseInt(request.getParameter("toolID"));
+		KitDao kitdao = new KitDao();
+		Tool tool = kitdao.findById(toolID);
+		String filepath = tool.getToolPath();
+		File file = new File(filepath);
+		downloadExistsFile(request, response, file);
 	}
 
-	protected void downloadExistsFile(HttpServletRequest request, HttpServletResponse response, File proposeFile)
+	protected boolean downloadExistsFile(HttpServletRequest request, HttpServletResponse response, File proposeFile)
 			throws IOException, FileNotFoundException {
 		log.debug("下载文件路径：" + proposeFile.getPath());
-		//System.out.println("下载文件的路径：" + proposeFile.getPath());
+		String filename=proposeFile.getName();
+		long fSize = proposeFile.length();
 		
-
-		/*
-		 * 解决各浏览器的中文乱码问题
-		 */
+		//开始下载，首先要解决各浏览器的中文乱码问题
 		response.setCharacterEncoding("utf-8");
 		String userAgent = request.getHeader("User-Agent");
-		byte[] bytes = userAgent.contains("MSIE") ? proposeFile.getName().getBytes() : proposeFile.getName().getBytes("UTF-8"); //处理safari的乱码问题
-		String filename=proposeFile.getName();
-		filename = new String(bytes, "ISO-8859-1"); // 各浏览器基本都支持ISO编码
+		
+		//处理safari的乱码问题
+		byte[] bytes = userAgent.contains("MSIE") ? proposeFile.getName().getBytes() : proposeFile.getName().getBytes("UTF-8");
+		
+		//各浏览器基本都支持ISO编码
+		filename = new String(bytes, "ISO-8859-1"); 
 		response.setHeader("Content-disposition", String.format("attachment; filename=\"%s\"", filename));
-		
-		
-		/*
-		 * 开始下载
-		 */
-		response.setContentType("application/x-download");	
-		long fSize = proposeFile.length();
 		response.setHeader("Accept-Ranges", "bytes");
 		response.setHeader("Content-Length", String.valueOf(fSize));
-		response.setHeader("Content-Disposition", "attachment; filename=" + filename);
+		response.setContentType("application/x-download");	
+		
 		long pos = 0;
 		if (null != request.getHeader("Range")) {
+			
 			// 不是从最开始下载，断点下载响应号为206  
-        
-			System.out.println("断点下载成功！");
 			response.setStatus(HttpServletResponse.SC_PARTIAL_CONTENT);
 			try {
+				
+				//当range的内容为100000-200000时，100000表示之前已经下载了100000个字节，200000表示文件字节总数
+				//所以要从100001处开始下载
 				pos = Long.parseLong(request.getHeader("Range").replaceAll("bytes=", "").split("-")[0]);
-				System.out.println(pos);
 			} catch (NumberFormatException e) {
 				log.error(request.getHeader("Range") + " is not Number!");
 				pos = 0;
+				return false;
 			}
 		}
+		
 		ServletOutputStream out = response.getOutputStream();
 		BufferedOutputStream bufferOut = new BufferedOutputStream(out);
 		InputStream inputStream = new FileInputStream(proposeFile);
@@ -146,6 +153,7 @@ public class Down extends HttpServlet {
 		bufferOut.close();
 		out.close();
 		inputStream.close();
+		return true;
 	}
 
 }

@@ -53,12 +53,12 @@
 					</tr>
 					<tr>
 						<td>权限类别&nbsp;&nbsp;&nbsp;</td>
-						<td><select class="form-control">
+						<td><select class="form-control" name="toolTypeid">
 								<option>请选择</option>
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
 						</select></td>
 					</tr>
 				</table>

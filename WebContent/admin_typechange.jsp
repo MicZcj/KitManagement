@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
@@ -36,27 +37,28 @@
 		<div class="row">
 			<div align="center">
 				<h1>修改工具类别</h1>
+				<form action="ToolTypechange1.do" method="post" >
 				<br>
 				<table border="0" height="200px">
 					<tr>
 						<td>工具类别id</td>
-						<td>123456</td>
+						<td>${tooltypeid}</td>
 					</tr>
 					<tr>
 						<td>类别名称</td>
-						<td><input name="" class="form-control" type="text"
-							placeholder="请输入旧密码"></td>
+						<td><input name="tooltypename" class="form-control" type="text"
+							></td>
 					</tr>
 
 				</table>
 				<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="submit" class="btn btn-primary">&nbsp;&nbsp;修&nbsp;&nbsp;改&nbsp;改&nbsp;</button>
+				<button type="submit" class="btn btn-primary">&nbsp;&nbsp;修&nbsp;&nbsp;改&nbsp;</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="admin_type.jsp"><button
 						type="button" class="btn btn-primary">&nbsp;&nbsp;返&nbsp;&nbsp;回&nbsp;&nbsp;</button></a>
 				<br>
 				<br>
 				<br>
-
+              </form>
 			</div>
 
 		</div>

@@ -33,13 +33,13 @@ public class UserDao extends BaseDao {
 			return user;
 		}
 	}
-	//增加用戶
+
+	// 增加用戶
 	public boolean addUser(User user) {
-		String sql = "insert into User"
-				+ "(UserID,UserNickname,UserPassword,UserName,Email,Phone,Department)"
+		String sql = "insert into User" + "(UserID,UserNickname,UserPassword,UserName,Email,Phone,Department)"
 				+ "VALUES(?,?,?,?,?,?,?)";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setLong(1,user.getUserID());
+			pstmt.setLong(1, user.getUserID());
 			pstmt.setString(2, user.getUserNickname());
 			pstmt.setString(3, user.getUserPassword());
 			pstmt.setString(4, user.getUserName());
@@ -54,4 +54,14 @@ public class UserDao extends BaseDao {
 		}
 	}
 
+	public void updatePassword(String password1) {
+		// TODO Auto-generated method stub
+		String sql = "Update User set UserPassword=?";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, password1);
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
+	}
 }

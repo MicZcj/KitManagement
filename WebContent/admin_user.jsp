@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
@@ -27,8 +28,9 @@
 <!--[if IE 8]>
 		    	<script src="assets/js/selectivizr.js"></script>
 		    <![endif]-->
-</head>
 
+</head>
+${alert}
 <body>
 	<%@ include file="admin_header.jsp"%>
 
@@ -36,8 +38,8 @@
 	<div class="container">
 		<div class="row">
 			<h1>管理员设置</h1>
-			<br> <a href="admin_usernew.jsp"><button type="button"
-					class="btn btn-info">&nbsp;新&nbsp;增&nbsp;管&nbsp;理&nbsp;员</button></a>
+			<br> <a href="ToolTypeShowAll_admin.do"><button
+					type="button" class="btn btn-info">&nbsp;新&nbsp;增&nbsp;管&nbsp;理&nbsp;员</button></a>
 			&nbsp;<br>&nbsp;
 			<table class="table table-striped">
 				<tr>
@@ -47,39 +49,18 @@
 					<th>权限</th>
 					<th>操作</th>
 				</tr>
-				<tr>
-					<td>1</td>
-					<td>haha</td>
-					<td>姓名111</td>
-					<td>图像处理</td>
-					<td><a href="admin_userchange.jsp"><button type="button"
-								class="btn btn-warning">修改</button></a>&nbsp;
-						<button type="button" class="btn btn-info">重置密码</button>&nbsp;
-						<button type="button" class="btn btn-danger">删除</button></td>
-
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>hahahaha</td>
-					<td>姓名222</td>
-					<td>图像处理</td>
-					<td><a href="admin_userchange.jsp"><button type="button"
-								class="btn btn-warning">修改</button></a>&nbsp;
-						<button type="button" class="btn btn-info">重置密码</button>&nbsp;
-						<button type="button" class="btn btn-danger">删除</button></td>
-
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>hahahahahaha</td>
-					<td>姓名333</td>
-					<td>编译器</td>
-					<td><a href="admin_userchange.jsp"><button type="button"
-								class="btn btn-warning">修改</button></a>&nbsp;
-						<button type="button" class="btn btn-info">重置密码</button>&nbsp;
-						<button type="button" class="btn btn-danger">删除</button></td>
-
-				</tr>
+				<c:forEach items="${admin1}" var="admin">
+					<tr>
+						<td>${admin.adminID}</td>
+						<td>${admin.adminNickname}</td>
+						<td>${admin.adminName}</td>
+						<td>${admin.toolTypeName}</td>
+						<td><a href="Admin_Userchange1.do?id=${admin.adminID}"><button
+									type="button" class="btn btn-warning">修改</button></a>&nbsp;
+							<a href="Admin_Userchangeps.do?id=${admin.adminID}"><button type="button" class="btn btn-info" onclick="return reset();">重置密码</button></a>&nbsp;
+							<a href="Admin_Userdelete.do?id=${admin.adminID}"><button type="button" class="btn btn-danger">删除</button></a></td>
+					</tr>
+				</c:forEach>
 
 			</table>
 

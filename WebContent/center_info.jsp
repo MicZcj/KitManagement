@@ -57,28 +57,28 @@
 	<section class="contact section-wrapper" id="contact">
 	<div class="container">
 		<div class="row">
-			<h1>张昌健</h1>
+			<h1>${user.userNickname }</h1>
 			<br>
 			<table class="table" height="200px">
 				<tr>
+					<td>用户名</td>
+					<td>${user.userNickname }</td>
+				</tr>
+				<tr>
 					<td>姓名</td>
-					<td>张昌健</td>
+					<td>${user.userName }</td>
 				</tr>
 				<tr>
-					<td>信息2</td>
-					<td>1111</td>
+					<td>email</td>
+					<td>${user.email }</td>
 				</tr>
 				<tr>
-					<td>信息3</td>
-					<td>1111</td>
+					<td>电话</td>
+					<td>${user.phone }</td>
 				</tr>
 				<tr>
-					<td>信息4</td>
-					<td>1111</td>
-				</tr>
-				<tr>
-					<td>信息5</td>
-					<td>1111</td>
+					<td>部门</td>
+					<td>${user.department }</td>
 				</tr>
 
 			</table>

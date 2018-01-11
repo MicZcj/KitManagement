@@ -8,6 +8,14 @@
 <html class="noIE" lang="en-US">
 <!--<![endif]-->
 <head>
+<script type="text/javascript">
+if("${result}"=="noequal")
+	alert("两次密码输入不一致！");
+</script>
+<script type="text/javascript">
+if(!${result})
+	alert("密码输入错误！");
+</script>
 <!-- meta -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -58,32 +66,32 @@
 	<div class="container">
 		<div align="center">
 			<div class="row">
-				<h1>张昌健</h1>
+				<h1>${user.userNickname}</h1>
 				<br>
-				<table border="0" height="200px">
-					<tr>
-						<td>旧密码</td>
-						<td><input name="oldPassword" class="form-control"
-							type="password" placeholder="请输入旧密码"></td>
-					</tr>
-					<tr>
-						<td>新密码</td>
-						<td><input name="password1" class="form-control"
-							type="password" placeholder="请输入新密码"></td>
-					</tr>
-					<tr>
-						<td>重复输入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td><input name="password2" class="form-control"
-							type="password" placeholder="请重复输入"></td>
-					</tr>
-				</table>
-				<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="submit" class="btn btn-primary">&nbsp;提&nbsp;交&nbsp;修&nbsp;改&nbsp;</button>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="center.jsp"><button
-						type="button" class="btn btn-primary">&nbsp;&nbsp;返&nbsp;&nbsp;回&nbsp;&nbsp;</button></a>
-				<br>
-				<br>
-				<br>
+				<form action="UpdatePassword.do" method="post">
+					<table border="0" height="200px">
+						<tr>
+							<td>旧密码</td>
+							<td><input id="oldPassword" name="oldPassword"
+								class="form-control" type="password" placeholder="请输入旧密码"></td>
+						</tr>
+						<tr>
+							<td>新密码</td>
+							<td><input id="password1" name="password1"
+								class="form-control" type="password" placeholder="请输入新密码"></td>
+						</tr>
+						<tr>
+							<td>重复输入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><input id="password2" name="password2"
+								class="form-control" type="password" placeholder="请重复输入"></td>
+						</tr>
+					</table>
+					<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="submit" class="btn btn-primary">&nbsp;提&nbsp;交&nbsp;修&nbsp;改&nbsp;</button>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="center.jsp"><button
+							type="button" class="btn btn-primary">&nbsp;&nbsp;返&nbsp;&nbsp;回&nbsp;&nbsp;</button></a>
+					<br> <br> <br>
+				</form>
 			</div>
 		</div>
 	</div>

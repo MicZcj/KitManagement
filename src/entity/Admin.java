@@ -6,6 +6,22 @@ public class Admin {
 	private String adminName; // 管理员姓名
 	private String adminPassword; // 管理员密码
 	private int toolTypeID; // 管理的工具类别ID
+	private String toolTypeName; //管理的工具名称
+
+	@Override
+	public String toString() {
+		return "Admin [adminID=" + adminID + ", adminNickname=" + adminNickname + ", adminName=" + adminName
+				+ ", adminPassword=" + adminPassword + ", toolTypeID=" + toolTypeID + ", toolTypeName=" + toolTypeName
+				+ "]";
+	}
+
+	public String getToolTypeName() {
+		return toolTypeName;
+	}
+
+	public void setToolTypeName(String toolTypeName) {
+		this.toolTypeName = toolTypeName;
+	}
 
 	public int getAdminID() {
 		return adminID;
