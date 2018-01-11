@@ -70,7 +70,7 @@ public class Bigupload extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
+		String savePath = "D:\\tool";
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setHeaderEncoding("UTF-8");
@@ -137,7 +137,7 @@ public class Bigupload extends HttpServlet {
 			// 合并文件
 
 			// 读取目录里面的所有文件
-			File f = new File(savePath + "/fileMd5/" + fileMd5);
+			File f = new File(savePath+ "/fileMd5/" + fileMd5);
 
 			File[] fileArray = f.listFiles(new FileFilter() {
 				// 排除目录，只要文件
@@ -159,7 +159,13 @@ public class Bigupload extends HttpServlet {
 					return 1;
 				}
 			});
-			File outputFile = new File(savePath + "/" + fileName);
+			//创建目录
+			File tempFileDir=new File(savePath+"/temp");
+			if (!tempFileDir.exists()) {
+				tempFileDir.mkdir();
+			}
+			File outputFile = new File(savePath+"/temp"+"/"+fileName);
+			System.out.println(outputFile.getAbsolutePath());
 			// 创建文件
 			outputFile.createNewFile();
 			// 输出流
@@ -174,14 +180,13 @@ public class Bigupload extends HttpServlet {
 				file.delete();
 			}
 			// 清除文件夹
-			File tempFile = new File(savePath + "/fileMd5/" + fileMd5);
+			File tempFile = new File("D:/tool" + "/fileMd5/" + fileMd5);
 			if (tempFile.isDirectory() && tempFile.exists()) {
 				tempFile.delete();
 			}
 			// 关闭流
 			outChannel.close();
 			response.setContentType("text/html;charset=utf-8");
-			response.getWriter().write("{\"msg\":\"合并成功\"}");
 		}
 	}
 }

@@ -72,50 +72,52 @@
 				<h1>工具上传</h1>
 				<br>
 				<form action="Upload" method="post">
-				<table border="0" height="500px">
-					<tr>
-						<td>名称</td>
-						<td width="700px"><input name="toolName" class="form-control"
-							type="text" placeholder="请输入名称"></td>
-					</tr>
-					<tr>
-						<td>版本号&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td><input name="toolEdition" class="form-control"
-							type="text" placeholder="请输入版本号"></td>
-					</tr>
-					<tr>
-						<td>分类</td>
-						<td><select id="type" name="type" class="form-control">
-								<c:forEach items="${tooltypelist}" var="tooltype"
-									varStatus="status">
-									<option>${tooltype.toolTypeName}</option>
-								</c:forEach>
-						</select></td>
-					</tr>
-					<tr>
-						<td>描述</td>
-						<td><textarea name="toolDescription"
-								class="message form-control" placeholder="请输入描述" rows="6"></textarea></td>
-					</tr>
-					<tr>
-						<td>标签</td>
-						<td><input name="toolTag" class="form-control" type="text"
-							placeholder="请输入标签"></td>
-					</tr>
-					<tr>
-						<td>文件</td>
-						<td>
-							<div id="dndArea"></div>
-							<ul id="fileList"></ul>
-							<div id="filePicker">点击选择文件</div>
-						</td>
-				</table>
-				<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="submit" class="btn btn-primary">&nbsp;&nbsp;上&nbsp;&nbsp;传&nbsp;&nbsp;</button></from>
-				<br>
-				<br>
-				<br>
+					<table border="0" height="700px">
+						<tr>
+							<td>名称</td>
+							<td width="700px"><input name="toolName"
+								class="form-control" type="text" placeholder="请输入名称"></td>
+						</tr>
+						<tr>
+							<td>版本号&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><input name="toolEdition" class="form-control"
+								type="text" placeholder="请输入版本号"></td>
+						</tr>
+						<tr>
+							<td>分类</td>
+							<td><select id="type" name="type" class="form-control">
+									<c:forEach items="${tooltypelist}" var="tooltype"
+										varStatus="status">
+										<option value="${tooltype.toolTypeID}">${tooltype.toolTypeName}</option>
+									</c:forEach>
+							</select></td>
+						</tr>
+						<tr>
+							<td>描述</td>
+							<td><textarea name="toolDescription"
+									class="message form-control" placeholder="请输入描述" rows="6"></textarea></td>
+						</tr>
+						<tr>
+							<td>标签</td>
+							<td><input name="toolTag" class="form-control" type="text"
+								placeholder="请输入标签"></td>
+						</tr>
+						<tr>
+							<td>文件</td>
+							<td>
+								<div id="filePicker">点击选择文件</div>
+
+							</td>
+						</tr>
+						<tr>
+						<td></td>
+							<td><ul id="fileList"></ul></td>
+						</tr>
+					</table>
+					<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="submit" class="btn btn-primary">&nbsp;&nbsp;上&nbsp;&nbsp;传&nbsp;&nbsp;</button>
+					</from>
+					<br> <br> <br>
 			</div>
 		</div>
 	</div>
@@ -191,8 +193,6 @@
 			server : "${pageContext.request.contextPath}/Bigupload",
 			pick : "#filePicker",
 			auto : true,
-			//开启拖拽功能，指定拖拽区域
-			dnd : "#dndArea",
 			//禁用页面其他地方的拖拽功能，防止页面直接打开文件
 			disableGlobalDnd : true,
 			//开启黏贴功能
@@ -209,30 +209,38 @@
 
 		});
 
-		uploader
-				.on(
-						"fileQueued",
-						function(file) {
+		uploader.on("fileQueued", function(file) {
 
-							$("#fileList")
-									.append(
-											"<div id='"+file.id+"' class='fileInfo'><span>"
-													+ file.name
-													+ "</span><div class='state'>等待上传...</div><span class='text'></span></div>");
-						});
-
-		uploader.on("uploadProgress", function(file, percentage) {
-			var id = $("#" + file.id);
-
-			id.find("div.state").text("上传中...");
-
-			id.find("span.text").text(Math.round(percentage * 100) + "%");
+			$("#fileList").append(
+					"<div id='"+file.id+"' class='fileInfo'><span>"
+							+ '<h4 class="info">' + file.name + '</h4>'
+							+ '<p class="state">等待上传...</p>' + '</div>');
 		});
 
-		uploader.on("uploadSuccess", function(file, response) {
+		// 文件上传过程中创建进度条实时显示。
+		uploader
+				.on(
+						'uploadProgress',
+						function(file, percentage) {
+							var $li = $('#' + file.id), $percent = $li
+									.find('.progress .progress-bar');
 
-			$("#" + file.id).find("div.state").text("上传完毕");
-		})
+							// 避免重复创建
+							if (!$percent.length) {
+								$percent = $(
+										'<div class="progress progress-striped active">'
+												+ '<div class="progress-bar" role="progressbar" style="width: 0%">'
+												+ '</div>' + '</div>')
+										.appendTo($li).find('.progress-bar');
+							}
+
+							$li.find('p.state').text('上传中');
+
+							$percent.css('width', percentage * 100 + '%');
+						});
+		uploader.on('uploadSuccess', function(file) {
+			$('#' + file.id).find('p.state').text('已上传');
+		});
 	</script>
 </body>
 </html>

@@ -772,7 +772,7 @@ public class KitDao extends BaseDao {
 			pstmt.setString(3,tool.getToolName());
 			pstmt.setString(4,tool.getToolDescription());
 			pstmt.setString(5,tool.getToolEdition());
-			pstmt.setLong(6,tool.getToolID());
+			pstmt.setLong(6,tool.getToolTypeID());
 			pstmt.setString(7,tool.getToolTag());
 			pstmt.setString(8,tool.getToolPath());
 			pstmt.setDate(9,new java.sql.Date(tool.getUploadTime().getTime()));
