@@ -72,7 +72,7 @@
 				<br>
 				<br>
 				<br>
-            </form>>
+            </form>
 			</div>
 
 		</div>

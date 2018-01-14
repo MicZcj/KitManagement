@@ -57,7 +57,7 @@
 	<div class="container">
 		<ol class="breadcrumb">
 			<li><a href="index.jsp">主页</a></li>
-			<li><a href="allKit.jsp">全部工具</a></li>
+			<li><a href="showAlltool.do?currPage=1">全部工具</a></li>
 			<li class="active">&nbsp;${tool.toolName}</li>
 		</ol>
 	</div>
